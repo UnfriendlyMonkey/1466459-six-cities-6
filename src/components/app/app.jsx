@@ -10,8 +10,23 @@ import Page404 from '../page404/page404';
 const App = (props) => {
   const {placesFound, locations} = props;
 
+  let pageClassName = ``;
+  switch (window.location.pathname) {
+    case `/`:
+      pageClassName = `page page--gray page--main`;
+      break;
+    case `/login`:
+      pageClassName = `page page--gray page--login`;
+      break;
+    case `/favorites`:
+      pageClassName = `page page--favorites-empty`;
+      break;
+    default:
+      pageClassName = `page`;
+  }
+
   return (
-    <div className="page page--gray page--main">
+    <div className={pageClassName}>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
