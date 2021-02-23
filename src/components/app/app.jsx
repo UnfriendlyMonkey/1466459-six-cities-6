@@ -1,14 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, {arrayOf} from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Property from '../property/property';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
+import {offerType} from '../../types/offer';
 
 const App = (props) => {
-  const {placesFound, locations} = props;
+  const {placesFound, locations, offers} = props;
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -52,7 +53,7 @@ const App = (props) => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Main placesFound={placesFound} locations={locations} />
+            <Main placesFound={placesFound} locations={locations} offers={offers}/>
           </Route>
           <Route exact path="/login">
             <Login />
@@ -73,10 +74,13 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  locations: PropTypes.arrayOf(
+  locations: arrayOf(
       PropTypes.string
   ).isRequired,
-  placesFound: PropTypes.number
+  placesFound: PropTypes.number,
+  offers: arrayOf(
+      offerType
+  ).isRequired
 };
 
 export default App;
