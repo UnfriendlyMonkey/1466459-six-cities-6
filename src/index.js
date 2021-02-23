@@ -10,7 +10,6 @@ const Setting = {
 
 ReactDOM.render(
     <App
-      placesFound={Setting.PLACES_FOUND}
       locations={Setting.LOCATIONS}
       offers={offers}
     />,

@@ -9,7 +9,7 @@ import Page404 from '../page404/page404';
 import {offerType} from '../../types/offer';
 
 const App = (props) => {
-  const {placesFound, locations, offers} = props;
+  const {locations, offers} = props;
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -53,7 +53,7 @@ const App = (props) => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Main placesFound={placesFound} locations={locations} offers={offers}/>
+            <Main locations={locations} offers={offers}/>
           </Route>
           <Route exact path="/login">
             <Login />
@@ -77,7 +77,6 @@ App.propTypes = {
   locations: arrayOf(
       PropTypes.string
   ).isRequired,
-  placesFound: PropTypes.number,
   offers: arrayOf(
       offerType
   ).isRequired

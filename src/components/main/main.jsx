@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 
 
 const Main = (props) => {
-  const {placesFound, locations, offers} = props;
-  const activeCity = `Amsterdam`;
+  const {locations, offers} = props;
+  const [activeCity, setActiveCity] = useState(`Amsterdam`);
+  const placesFound = offers.filter((offer) => offer.city.name === activeCity).length;
 
   return (
     <main className="page__main page__main--index">
@@ -16,7 +17,12 @@ const Main = (props) => {
           <ul className="locations__list tabs__list">
             {
               locations.map((item, i) => <li key={item + i} className="locations__item">
-                <a className={item === activeCity ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`} href="#">
+                <a
+                  className={item === activeCity ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`}
+                  href="#"
+                  onClick={({target}) => {
+                    setActiveCity(target.textContent);
+                  }}>
                   <span>{item}</span>
                 </a>
               </li>)
@@ -37,7 +43,7 @@ const Main = (props) => {
                   <use xlinkHref="#icon-arrow-select"></use>
                 </svg>
               </span>
-              <ul className="places__options places__options--custom places__options--opened">
+              <ul className="places__options places__options--custom">
                 <li className="places__option places__option--active" tabIndex="0">Popular</li>
                 <li className="places__option" tabIndex="0">Price: low to high</li>
                 <li className="places__option" tabIndex="0">Price: high to low</li>
@@ -59,7 +65,6 @@ Main.propTypes = {
   locations: PropTypes.arrayOf(
       PropTypes.string
   ).isRequired,
-  placesFound: PropTypes.number,
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired
