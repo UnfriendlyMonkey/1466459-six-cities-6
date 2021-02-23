@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
-import PlaceCard from '../place-card/place-card';
+import FavoritesCity from './favorites-city';
 
 
 const Favorites = (props) => {
-  const {offers} = props;
-  const cities = new Set(offers.map((offer) => offer.city.name));
+  const offers = props.offers.filter((offer) => offer.isFavorite === true);
+  const cities = [...new Set(offers.map((offer) => offer.city.name))];
 
   return (
     <main className="page__main page__main--favorites">
@@ -14,35 +14,9 @@ const Favorites = (props) => {
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="#">
-                    <span>Amsterdam</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                {offers.map((offer) => (
-                  <PlaceCard key={offer.id} offer={offer} fromFavorites={true}/>
-                ))}
-              </div>
-            </li>
-
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                {offers.map((offer) => (
-                  <PlaceCard key={offer.id} offer={offer} fromFavorites={true}/>
-                ))}
-              </div>
-            </li>
+            {cities.map((city) => (
+              <FavoritesCity key={cities.indexOf(city)} city={city} offers={offers.filter((offer) => offer.city.name === city)}/>
+            ))}
           </ul>
         </section>
       </div>
@@ -53,7 +27,7 @@ const Favorites = (props) => {
 Favorites.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
-  ).isRequired
+  )
 };
 
 export default Favorites;

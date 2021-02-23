@@ -59,7 +59,7 @@ const App = (props) => {
             <Login />
           </Route>
           <Route exact path="/favorites">
-            <Favorites />
+            <Favorites offers={offers}/>
           </Route>
           <Route exact path="/offer/:id">
             <Property />

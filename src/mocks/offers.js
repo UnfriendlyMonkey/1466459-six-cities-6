@@ -180,7 +180,7 @@ export default [
         "longitude": 4.895168,
         "zoom": 10
       },
-      "name": `Amsterdam`
+      "name": `Cologne`
     },
     "description": `Wood and stone place that hides behind a river by the unique lightness of Amsterdam.`,
     "goods": [
