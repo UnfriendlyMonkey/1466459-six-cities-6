@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 
 const PlaceCard = (props) => {
-  const {offer, onHover} = props;
+  const {offer, onHover, fromFavorites = false} = props;
   const {isPremium, price, previewImage, rating, title, type, isFavorite, id} = offer;
   const premiumMark = <div className="place-card__mark">
     <span>Premium</span>
@@ -18,14 +18,14 @@ const PlaceCard = (props) => {
   };
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={handleHover}>
+    <article className={fromFavorites ? `favorites__card place-card` : `cities__place-card place-card`} onMouseEnter={handleHover}>
       {isPremium && premiumMark}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={fromFavorites ? `favorites__image-wrapper place-card__image-wrapper` : `cities__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={fromFavorites ? `150` : `260`} height={fromFavorites ? `110` : `200`} alt="Place image"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={fromFavorites ? `favorites__card-info place-card__info` : `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -55,7 +55,8 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   offer: offerType,
-  onHover: PropTypes.func.isRequired
+  onHover: PropTypes.func,
+  fromFavorites: PropTypes.bool
 };
 
 export default PlaceCard;
