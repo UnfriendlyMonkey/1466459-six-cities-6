@@ -9,7 +9,7 @@ const PlaceCard = (props) => {
   </div>;
   const favoriteClassName = () => {
     const prefix = `place-card__bookmark-button button`;
-    return isFavorite ? prefix + `place-card__bookmark-button--active` : prefix;
+    return isFavorite ? prefix + ` place-card__bookmark-button--active` : prefix;
   };
 
   return (
