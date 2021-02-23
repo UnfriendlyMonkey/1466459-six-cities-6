@@ -5,7 +5,7 @@ import PlaceCard from '../place-card/place-card';
 
 const OffersList = (props) => {
   const {offers} = props;
-  const setActiveOffer = useState(offers[0].id)[1];
+  const setActiveOffer = useState(null)[1];
 
   // console.log(activeOffer);
   // может логичнее сюда и карту перенести тогда, иначе непонятно, где и как это состояние использовать?
