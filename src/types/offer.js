@@ -1,6 +1,6 @@
-import {objectOf, object, arrayOf, bool, shape, number, string} from 'prop-types';
+import {object, arrayOf, bool, shape, number, string} from 'prop-types';
 
-export const offerType = objectOf(shape({
+export const offerType = shape({
   bedrooms: number,
   city: object,
   description: string,
@@ -17,5 +17,4 @@ export const offerType = objectOf(shape({
   rating: number,
   title: string.isRequired,
   type: string.isRequired,
-})
-);
+});
