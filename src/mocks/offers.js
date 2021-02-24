@@ -1,4 +1,4 @@
-const AVATAR_URL = `https://i.pravatar.cc/128`;
+const AVATARUrl = `https://i.pravatar.cc/128`;
 
 export default [
   {
@@ -24,13 +24,13 @@ export default [
       `Baby seat`
     ],
     "host": {
-      "avatar_url": `${AVATAR_URL}?rnd=${Math.random()}`,
+      "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 3,
-      "is_pro": true,
+      "isPro": true,
       "name": `Angelina`
     },
     "id": 1,
-    "images": [`img/apartment-01.jpg`, `img/1.png`, `img/2.png`],
+    "images": [`img/apartment-01.jpg`, `img/room.jpg`],
     "isFavorite": false,
     "isPremium": true,
     "location": {
@@ -67,13 +67,13 @@ export default [
       `Towels`
     ],
     "host": {
-      "avatar_url": `${AVATAR_URL}?rnd=${Math.random()}`,
+      "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 5,
-      "is_pro": true,
+      "isPro": true,
       "name": `Boris`
     },
     "id": 2,
-    "images": [`img/room.jpg`, `img/1.png`, `img/2.png`],
+    "images": [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`],
     "isFavorite": true,
     "isPremium": false,
     "location": {
@@ -109,13 +109,13 @@ export default [
       `Baby seat`
     ],
     "host": {
-      "avatar_url": `${AVATAR_URL}?rnd=${Math.random()}`,
+      "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 7,
-      "is_pro": false,
+      "isPro": false,
       "name": `Viktor`
     },
     "id": 3,
-    "images": [`img/apartment-02.jpg`, `img/1.png`, `img/2.png`],
+    "images": [`img/apartment-02.jpg`, `img/apartment-01.jpg`, `img/apartment-03.jpg`],
     "isFavorite": false,
     "isPremium": true,
     "location": {
@@ -151,13 +151,13 @@ export default [
       `Baby seat`
     ],
     "host": {
-      "avatar_url": `${AVATAR_URL}?rnd=${Math.random()}`,
+      "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 9,
-      "is_pro": false,
+      "isPro": false,
       "name": `Galina`
     },
     "id": 4,
-    "images": [`img/apartment-03.jpg`, `img/1.png`, `img/2.png`],
+    "images": [`img/apartment-03.jpg`, `img/room.jpg`, `img/apartment-02.jpg`, `img/apartment-01.jpg`, `img/studio-01.jpg`],
     "isFavorite": true,
     "isPremium": false,
     "location": {
@@ -182,7 +182,7 @@ export default [
       },
       "name": `Cologne`
     },
-    "description": `Wood and stone place that hides behind a river by the unique lightness of Amsterdam.`,
+    "description": `Wood and stone place that hides behind a river by the unique lightness of Cologne.`,
     "goods": [
       `Heating`,
       `Washing machine`,
@@ -191,13 +191,13 @@ export default [
       `Towels`
     ],
     "host": {
-      "avatar_url": `${AVATAR_URL}?rnd=${Math.random()}`,
+      "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 1,
-      "is_pro": true,
+      "isPro": true,
       "name": `Danila`
     },
     "id": 5,
-    "images": [`img/studio-01.jpg`, `img/1.png`, `img/2.png`],
+    "images": [`img/studio-01.jpg`],
     "isFavorite": true,
     "isPremium": false,
     "location": {
