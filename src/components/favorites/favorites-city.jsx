@@ -17,7 +17,7 @@ const FavoritesCity = (props) => {
       </div>
       <div className="favorites__places">
         {offers.map((offer) => (
-          <PlaceCard key={offer.id} offer={offer} fromFavorites={true}/>
+          <PlaceCard key={offer.id} offer={offer} from={`favorites`}/>
         ))}
       </div>
     </li>

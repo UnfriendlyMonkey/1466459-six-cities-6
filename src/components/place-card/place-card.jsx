@@ -4,15 +4,30 @@ import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 
 const PlaceCard = (props) => {
-  const {offer, onHover, fromFavorites = false} = props;
+  const {offer, onHover, from = `main`} = props;
   const {isPremium, price, previewImage, rating, title, type, isFavorite, id} = offer;
   const premiumMark = <div className="place-card__mark">
     <span>Premium</span>
   </div>;
-  const favoriteClassName = () => {
-    const prefix = `place-card__bookmark-button button`;
-    return isFavorite ? prefix + ` place-card__bookmark-button--active` : prefix;
-  };
+  const favoriteClassName = `place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`;
+  let articleClassName = `place-card`;
+  let imageWrapperClassName = `place-card__image-wrapper`;
+  let infoClassName = `place-card__info`;
+
+  switch (from) {
+    case (`favorites`):
+      articleClassName += ` favorites__card`;
+      imageWrapperClassName += ` favorites__image-wrapper`;
+      infoClassName += ` favorites__card-info`;
+      break;
+    case (`property`):
+      articleClassName += ` near-places__card`;
+      imageWrapperClassName += ` near-places__image-wrapper`;
+      break;
+    default:
+      articleClassName += ` cities__place-card`;
+      imageWrapperClassName += ` cities__image-wrapper`;
+  }
 
   const handleHover = () => {
     if (onHover) {
@@ -21,20 +36,20 @@ const PlaceCard = (props) => {
   };
 
   return (
-    <article className={fromFavorites ? `favorites__card place-card` : `cities__place-card place-card`} onMouseEnter={handleHover}>
+    <article className={articleClassName} onMouseEnter={handleHover}>
       {isPremium && premiumMark}
-      <div className={fromFavorites ? `favorites__image-wrapper place-card__image-wrapper` : `cities__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
-          <img className="place-card__image" src={previewImage} width={fromFavorites ? `150` : `260`} height={fromFavorites ? `110` : `200`} alt="Place image"/>
-        </a>
+      <div className={imageWrapperClassName}>
+        <Link to={`/offer/` + id}>
+          <img className="place-card__image" src={previewImage} width={from === `favorites` ? `150` : `260`} height={from === `favorites` ? `110` : `200`} alt="Place image"/>
+        </Link>
       </div>
-      <div className={fromFavorites ? `favorites__card-info place-card__info` : `place-card__info`}>
+      <div className={infoClassName}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={favoriteClassName()} type="button">
+          <button className={favoriteClassName} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -59,7 +74,7 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   offer: offerType,
   onHover: PropTypes.func,
-  fromFavorites: PropTypes.bool
+  from: PropTypes.oneOf([`main`, `favorites`, `property`])
 };
 
 export default PlaceCard;
