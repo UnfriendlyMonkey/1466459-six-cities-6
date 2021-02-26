@@ -176,8 +176,8 @@ export default [
     "bedrooms": 1,
     "city": {
       "location": {
-        "latitude": 52.370216,
-        "longitude": 4.895168,
+        "latitude": 50.9333,
+        "longitude": 6.95,
         "zoom": 10
       },
       "name": `Cologne`
@@ -201,8 +201,8 @@ export default [
     "isFavorite": true,
     "isPremium": false,
     "location": {
-      "latitude": 52.35514938496378,
-      "longitude": 4.673877537499948,
+      "latitude": 50.9133,
+      "longitude": 6.96,
       "zoom": 8
     },
     "maxAdults": 2,
