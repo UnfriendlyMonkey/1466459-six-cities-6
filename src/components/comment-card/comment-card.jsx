@@ -5,6 +5,7 @@ const CommentCard = ({item}) => {
 
   const {user, rating, comment, date} = item;
   const {name, avatarUrl} = user;
+  const dateToShow = new Date(date).toLocaleString(`en-US`, {year: `numeric`, month: `long`});
 
   return (
     <li className="reviews__item">
@@ -26,7 +27,7 @@ const CommentCard = ({item}) => {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date.slice(0, 10)}>April 2019</time>
+        <time className="reviews__time" dateTime={date.slice(0, 10)}>{dateToShow}</time>
       </div>
     </li>
   );
