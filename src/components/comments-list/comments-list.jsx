@@ -9,7 +9,7 @@ const CommentsList = ({id}) => {
 
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{items.length}</span></h2>
       <ul className="reviews__list">
         {items.map((item) => (
           <CommentCard key={item.id} item={item} />

@@ -1,9 +1,9 @@
 import React from 'react';
 import {arrayOf} from 'prop-types';
 import {offerType} from '../../types/offer';
-import PlaceCard from '../place-card/place-card';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
+import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 
 
@@ -112,13 +112,7 @@ const Property = (props) => {
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-
-            {nearPlaces.map((offer) => (
-              <PlaceCard key={offer.id} offer={offer} from={`property`}/>
-            ))}
-
-          </div>
+          <OffersList offers={nearPlaces} from={`property`}/>
         </section>
       </div>
     </main>
