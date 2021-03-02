@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
 
 
 const Main = (props) => {
@@ -53,7 +54,9 @@ const Main = (props) => {
             <OffersList offers={offers.filter((offer) => offer.city.name === activeCity)}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              <Map city={activeCity} points={offers.filter((offer) => offer.city.name === activeCity)}/>
+            </section>
           </div>
         </div>
       </div>

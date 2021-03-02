@@ -4,7 +4,6 @@ import App from './components/app/app';
 import offers from './mocks/offers';
 
 const Setting = {
-  PLACES_FOUND: 312,
   LOCATIONS: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`]
 };
 
