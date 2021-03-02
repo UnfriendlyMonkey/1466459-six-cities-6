@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {offerType} from '../../types/offer';
+import {commentType} from '../../types/comment';
 
 const CommentCard = ({comment}) => {
 
@@ -31,9 +30,7 @@ const CommentCard = ({comment}) => {
 };
 
 CommentCard.propTypes = {
-  comment: PropTypes.arrayOf(
-      offerType
-  ).isRequired
+  comment: commentType.isRequired
 };
 
 export default CommentCard;
