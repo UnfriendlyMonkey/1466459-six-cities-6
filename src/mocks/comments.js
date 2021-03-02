@@ -17,7 +17,7 @@ export default [
   {
     "comment": `A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam.`,
     "date": `2020-05-11T14:13:56.569Z`,
-    "id": 1,
+    "id": 2,
     "propertyId": 2,
     "rating": 5,
     "user": {
@@ -30,7 +30,7 @@ export default [
   {
     "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     "date": `2019-10-23T14:13:56.569Z`,
-    "id": 1,
+    "id": 3,
     "propertyId": 1,
     "rating": 3,
     "user": {
@@ -43,7 +43,7 @@ export default [
   {
     "comment": `Wood and stone place that hides behind a river by the unique lightness of Cologne.`,
     "date": `2020-05-08T14:13:56.569Z`,
-    "id": 1,
+    "id": 4,
     "propertyId": 3,
     "rating": 4,
     "user": {
@@ -56,7 +56,7 @@ export default [
   {
     "comment": `Nice, cozy, warm big bed apartment.`,
     "date": `2019-06-17T14:13:56.569Z`,
-    "id": 1,
+    "id": 5,
     "propertyId": 5,
     "rating": 5,
     "user": {

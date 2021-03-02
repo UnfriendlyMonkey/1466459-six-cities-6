@@ -4,6 +4,7 @@ import {offerType} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
+import Map from '../map/map';
 
 
 const Property = (props) => {
@@ -104,7 +105,9 @@ const Property = (props) => {
             </section>
           </div>
         </div>
-        <section className="property__map map"></section>
+        <section className="property__map map">
+          <Map city={property.city.name} points={nearPlaces}/>
+        </section>
       </section>
       <div className="container">
         <section className="near-places places">
