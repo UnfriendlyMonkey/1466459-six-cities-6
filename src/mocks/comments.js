@@ -18,8 +18,8 @@ export default [
     "comment": `A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam.`,
     "date": `2019-05-11T14:13:56.569Z`,
     "id": 1,
-    "propertyId": 1,
-    "rating": 4,
+    "propertyId": 2,
+    "rating": 5,
     "user": {
       "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 3,
@@ -31,8 +31,8 @@ export default [
     "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     "date": `2019-10-08T14:13:56.569Z`,
     "id": 1,
-    "propertyId": 2,
-    "rating": 4,
+    "propertyId": 1,
+    "rating": 3,
     "user": {
       "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 5,
@@ -58,7 +58,7 @@ export default [
     "date": `2019-06-06T14:13:56.569Z`,
     "id": 1,
     "propertyId": 5,
-    "rating": 4,
+    "rating": 5,
     "user": {
       "avatarUrl": `${AVATARUrl}?rnd=${Math.random()}`,
       "id": 9,

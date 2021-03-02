@@ -99,7 +99,7 @@ const Property = (props) => {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <CommentsList />
+              <CommentsList id={id}/>
               <CommentForm />
             </section>
           </div>
