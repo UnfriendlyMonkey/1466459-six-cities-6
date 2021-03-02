@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {offerType} from '../../types/offer';
 import CommentCard from '../comment-card/comment-card';
 
-const CommentsList = ({comments}) => {
+const CommentsList = ({id}) => {
 
   return (
-    <ul className="reviews__list">
-      <CommentCard />
-    </ul>
+    <>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <ul className="reviews__list">
+        <CommentCard />
+      </ul>
+    </>
   );
 };
 
 CommentsList.propTypes = {
-  comments: PropTypes.arrayOf(
-      offerType
-  ).isRequired
+  id: PropTypes.number.isRequired
 };
 
 export default CommentsList;
