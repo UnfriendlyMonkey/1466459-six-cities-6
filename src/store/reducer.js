@@ -1,5 +1,5 @@
-import offers from './mocks/offers';
-import ActionType from './action';
+import offers from '../mocks/offers';
+import {ActionType} from './action';
 
 const initialState = {
   currentCity: `Paris`,
