@@ -1,36 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
+import {LocationsList} from '../locations-list/location-list';
+import {connect} from 'react-redux';
 
 
 const Main = (props) => {
-  const {locations, offers} = props;
-  const [activeCity, setActiveCity] = useState(`Amsterdam`);
+  const {activeCity, offers} = props;
   const placesFound = offers.filter((offer) => offer.city.name === activeCity).length;
 
   return (
     <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            {
-              locations.map((item, i) => <li key={item + i} className="locations__item">
-                <a
-                  className={item === activeCity ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`}
-                  href="#"
-                  onClick={({target}) => {
-                    setActiveCity(target.textContent);
-                  }}>
-                  <span>{item}</span>
-                </a>
-              </li>)
-            }
-          </ul>
-        </section>
-      </div>
+      <LocationsList/>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
@@ -65,12 +48,16 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  locations: PropTypes.arrayOf(
-      PropTypes.string
-  ).isRequired,
   offers: PropTypes.arrayOf(
       offerType
-  ).isRequired
+  ).isRequired,
+  activeCity: PropTypes.string.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  activeCity: state.currentCity,
+});
+
+export {Main};
+export default connect(mapStateToProps, null)(Main);

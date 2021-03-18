@@ -40,7 +40,7 @@ LocationsList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  locations: state.LOCATIONS,
+  locations: state.locations,
   activeCity: state.currentCity,
 });
 
