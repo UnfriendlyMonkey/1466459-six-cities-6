@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
-import {LocationsList} from '../locations-list/location-list';
-import {connect} from 'react-redux';
+import LocationsList from '../locations-list/location-list';
 
 
 const Main = (props) => {
-  const {activeCity, offers} = props;
+  const {locations, offers} = props;
+  const [activeCity, setActiveCity] = useState(`Paris`);
   const placesFound = offers.filter((offer) => offer.city.name === activeCity).length;
 
   return (
     <main className="page__main page__main--index">
-      <LocationsList/>
+      <LocationsList locations={locations} activeCity={activeCity} setActiveCity={setActiveCity}/>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
@@ -48,16 +48,12 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  locations: PropTypes.arrayOf(
+      PropTypes.string
+  ).isRequired,
   offers: PropTypes.arrayOf(
       offerType
-  ).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  ).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  activeCity: state.currentCity,
-});
-
-export {Main};
-export default connect(mapStateToProps, null)(Main);
+export default Main;
