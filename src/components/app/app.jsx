@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes, {arrayOf} from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Property from '../property/property';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
-import {offerType} from '../../types/offer';
 
 const App = () => {
   // const {locations, offers} = props;
@@ -74,14 +72,5 @@ const App = () => {
     </div>
   );
 };
-
-// App.propTypes = {
-//   locations: arrayOf(
-//       PropTypes.string
-//   ).isRequired,
-//   offers: arrayOf(
-//       offerType
-//   ).isRequired
-// };
 
 export default App;
