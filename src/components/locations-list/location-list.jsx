@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
-// import {ActionCreator} from '../../store/action';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
 const LocationsList = (props) => {
   const {locations, activeCity, setActiveCity} = props;
@@ -39,17 +39,17 @@ LocationsList.propTypes = {
   setActiveCity: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = (state) => ({
-//   locations: state.locations,
-//   activeCity: state.currentCity,
-// });
+const mapStateToProps = (state) => ({
+  locations: state.locations,
+  activeCity: state.currentCity,
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   setActiveCity(city) {
-//     dispatch(ActionCreator.setActiveCity(city));
-//   },
-// });
+const mapDispatchToProps = (dispatch) => ({
+  setActiveCity(city) {
+    dispatch(ActionCreator.setActiveCity(city));
+  },
+});
 
-// export {LocationsList};
-// export default connect(mapStateToProps, mapDispatchToProps)(LocationsList);
-export default LocationsList;
+export {LocationsList};
+export default connect(mapStateToProps, mapDispatchToProps)(LocationsList);
+// export default LocationsList;

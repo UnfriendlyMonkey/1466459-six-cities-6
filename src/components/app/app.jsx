@@ -8,8 +8,8 @@ import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import {offerType} from '../../types/offer';
 
-const App = (props) => {
-  const {locations, offers} = props;
+const App = () => {
+  // const {locations, offers} = props;
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -55,16 +55,16 @@ const App = (props) => {
         </header>
         <Switch>
           <Route exact path="/">
-            <Main locations={locations} offers={offers}/>
+            <Main />
           </Route>
           <Route exact path="/login">
             <Login />
           </Route>
           <Route exact path="/favorites">
-            <Favorites offers={offers}/>
+            <Favorites />
           </Route>
           <Route exact path="/offer/:id">
-            <Property offers={offers}/>
+            <Property />
           </Route>
           <Route>
             <Page404 />
@@ -75,13 +75,13 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
-  locations: arrayOf(
-      PropTypes.string
-  ).isRequired,
-  offers: arrayOf(
-      offerType
-  ).isRequired
-};
+// App.propTypes = {
+//   locations: arrayOf(
+//       PropTypes.string
+//   ).isRequired,
+//   offers: arrayOf(
+//       offerType
+//   ).isRequired
+// };
 
 export default App;
