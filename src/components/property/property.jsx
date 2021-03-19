@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import {arrayOf} from 'prop-types';
 import {offerType} from '../../types/offer';
 import CommentForm from '../comment-form/comment-form';
@@ -7,8 +9,7 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 
 
-const Property = (props) => {
-  const {offers} = props;
+const Property = ({offers}) => {
   const index = parseInt(window.location.pathname.slice(7), 10);
   const property = offers.filter((offer) => offer.id === index)[0];
   const {id, images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
@@ -125,4 +126,9 @@ Property.propTypes = {
   ).isRequired
 };
 
-export default Property;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {Property};
+export default connect(mapStateToProps, null)(Property);
