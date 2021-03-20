@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {useParams} from 'react-router-dom';
 
 import {arrayOf} from 'prop-types';
 import {offerType} from '../../types/offer';
@@ -10,9 +11,10 @@ import Map from '../map/map';
 
 
 const Property = ({offers}) => {
-  const index = parseInt(window.location.pathname.slice(7), 10);
-  const property = offers.filter((offer) => offer.id === index)[0];
-  const {id, images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
+  let {id} = useParams();
+  id = parseInt(id, 10);
+  const property = offers.filter((offer) => offer.id === id)[0];
+  const {images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
   const {avatarUrl, name, isPro} = host;
   const avatarClassName = `property__avatar-wrapper user__avatar-wrapper ${isPro && `property__avatar-wrapper--pro`}`;
   const nearPlaces = offers.filter((offer) => offer !== property && offer.city.name === property.city.name);
