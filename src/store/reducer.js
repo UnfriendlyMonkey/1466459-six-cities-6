@@ -33,11 +33,11 @@ const reducer = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true
       };
-    case ActionType.LOAD_PROPERTY:
-      return {
-        ...state,
-        currentProperty: action.payload
-      };
+    // case ActionType.LOAD_PROPERTY:
+    //   return {
+    //     ...state,
+    //     currentProperty: action.payload
+    //   };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,

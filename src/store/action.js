@@ -2,7 +2,7 @@ export const ActionType = {
   CHANGE_CITY: `changeCity`,
   RESET: `reset`,
   LOAD_OFFERS: `loadOffers`,
-  LOAD_PROPERTY: `loadProperty`,
+  // LOAD_PROPERTY: `loadProperty`,
   REQUIRED_AUTHORIZATION: `requiredAuthorization`,
 };
 
@@ -18,10 +18,10 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers
   }),
-  loadProperty: (property) => ({
-    type: ActionType.LOAD_PROPERTY,
-    payload: property
-  }),
+  // loadProperty: (property) => ({
+  //   type: ActionType.LOAD_PROPERTY,
+  //   payload: property
+  // }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status

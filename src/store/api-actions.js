@@ -8,10 +8,10 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
     .then((offers) => dispatch(ActionCreator.loadOffers(offers)))
 );
 
-export const fetchProperty = ({id}) => (dispatch, _getState, api) => (
-  api.get(`/hotels/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadProperty(data)))
-);
+// export const fetchProperty = ({id}) => (dispatch, _getState, api) => (
+//   api.get(`/hotels/${id}`)
+//     .then(({data}) => dispatch(ActionCreator.loadProperty(data)))
+// );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
