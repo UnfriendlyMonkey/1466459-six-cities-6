@@ -2,6 +2,7 @@ export const ActionType = {
   CHANGE_CITY: `changeCity`,
   RESET: `reset`,
   LOAD_OFFERS: `loadOffers`,
+  REQUIRED_AUTHORIZATION: `requiredAuthorization`,
 };
 
 export const ActionCreator = {
@@ -15,5 +16,9 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
-  })
+  }),
+  requiredAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status
+  }),
 };
