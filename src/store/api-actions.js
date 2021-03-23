@@ -1,9 +1,11 @@
 import {ActionCreator} from './action';
 import {AuthorizationStatus} from './reducer';
+import {offersAdapter} from '../services/offers-adapter';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+    .then(({data}) => data.map(offersAdapter))
+    .then((offers) => dispatch(ActionCreator.loadOffers(offers)))
 );
 
 export const fetchProperty = ({id}) => (dispatch, _getState, api) => (

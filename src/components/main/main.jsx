@@ -63,9 +63,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  locations: PropTypes.arrayOf(
-      PropTypes.string
-  ).isRequired,
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
