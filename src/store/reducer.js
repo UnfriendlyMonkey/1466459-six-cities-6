@@ -1,7 +1,7 @@
-import offers from '../mocks/offers';
+// import offers from '../mocks/offers';
 import {ActionType} from './action';
 
-const AuthorizationStatus = {
+export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
@@ -9,8 +9,9 @@ const AuthorizationStatus = {
 const initialState = {
   locations: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
   currentCity: `Paris`,
-  offers,
-  offersToShow: offers.filter((offer) => offer.city.name === `Paris`),
+  offers: [],
+  currentProperty: {},
+  // offersToShow: offers.filter((offer) => offer.city.name === `Paris`),
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
@@ -29,6 +30,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload
+      };
+    case ActionType.LOAD_PROPERTY:
+      return {
+        ...state,
+        currentProperty: action.payload
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
