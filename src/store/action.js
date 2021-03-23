@@ -1,6 +1,7 @@
 export const ActionType = {
   CHANGE_CITY: `changeCity`,
   RESET: `reset`,
+  LOAD_OFFERS: `loadOffers`,
 };
 
 export const ActionCreator = {
@@ -10,5 +11,9 @@ export const ActionCreator = {
   }),
   reset: () => ({
     type: ActionType.RESET,
+  }),
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers
   })
 };

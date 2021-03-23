@@ -19,6 +19,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...initialState
       };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload
+      };
   }
   return state;
 };
