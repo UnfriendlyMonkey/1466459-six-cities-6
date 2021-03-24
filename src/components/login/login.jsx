@@ -71,7 +71,6 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
-    console.log(authData);
     dispatch(login(authData));
   }
 });
