@@ -5,6 +5,7 @@ import Login from '../login/login';
 import Property from '../property/property';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
+import PrivateRoute from '../private-route/private-route';
 
 const App = () => {
   // const {locations, offers} = props;
@@ -58,9 +59,11 @@ const App = () => {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/favorites">
-            <Favorites />
-          </Route>
+          <PrivateRoute exact
+            path="/favorites"
+            render={() => <Favorites />}
+          >
+          </PrivateRoute>
           <Route exact path="/offer/:id">
             <Property />
           </Route>
