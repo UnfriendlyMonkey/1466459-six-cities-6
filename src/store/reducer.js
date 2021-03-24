@@ -1,10 +1,6 @@
 // import offers from '../mocks/offers';
 import {ActionType} from './action';
-
-export const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from '../const';
 
 const initialState = {
   locations: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],

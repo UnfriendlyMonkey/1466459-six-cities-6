@@ -1,5 +1,5 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus} from './reducer';
+import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
