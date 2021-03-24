@@ -41,7 +41,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
-        authorizationStatus: action.payload
+        authorizationStatus: action.payload.status,
+        login: action.payload.login
       };
   }
   return state;

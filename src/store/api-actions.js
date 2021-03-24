@@ -19,7 +19,9 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const login = ({login: email, password}) => (dispatch, _getState, api) => (
+export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, email)))
+    .catch(() => {
+    })
 );

@@ -22,8 +22,11 @@ export const ActionCreator = {
   //   type: ActionType.LOAD_PROPERTY,
   //   payload: property
   // }),
-  requireAuthorization: (status) => ({
+  requireAuthorization: (status, login = ``) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status
+    payload: {
+      status,
+      login
+    }
   }),
 };
