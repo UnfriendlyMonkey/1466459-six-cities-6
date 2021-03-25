@@ -50,7 +50,7 @@ const App = (props) => {
                   <li className="header__nav-item user">
                     <Link
                       className="header__nav-link header__nav-link--profile"
-                      to={login === `` ? `/login` : ``}
+                      to={login === `` ? AppRoute.LOGIN : AppRoute.FAVORITES}
                     >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
