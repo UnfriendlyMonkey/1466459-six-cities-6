@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
@@ -7,8 +9,12 @@ import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
-const App = () => {
+const App = (props) => {
   // const {locations, offers} = props;
+
+  const {login} = props;
+  console.log(props);
+  console.log(login);
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -41,11 +47,14 @@ const App = () => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link
+                      className="header__nav-link header__nav-link--profile"
+                      to={login === `` ? `/login` : ``}
+                    >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                      <span className="header__user-name user__name">{login === `` ? `Sign in` : login}</span>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -76,4 +85,13 @@ const App = () => {
   );
 };
 
-export default App;
+App.propTypes = {
+  login: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);
