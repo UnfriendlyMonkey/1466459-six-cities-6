@@ -15,7 +15,9 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data}) => {
+      return dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.email));
+    })
     .catch(() => {})
 );
 

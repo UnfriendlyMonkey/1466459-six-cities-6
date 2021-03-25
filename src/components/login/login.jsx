@@ -1,9 +1,10 @@
 import React, {useRef} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {login} from '../../store/api-actions';
 
-const Login = ({onSubmit}) => {
+const Login = ({onSubmit, activeCity}) => {
 
   const loginRef = useRef();
   const passwordRef = useRef();
@@ -55,9 +56,9 @@ const Login = ({onSubmit}) => {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>Amsterdam</span>
-            </a>
+            <Link className="locations__item-link" to={`/`}>
+              <span>{activeCity}</span>
+            </Link>
           </div>
         </section>
       </div>
@@ -67,7 +68,12 @@ const Login = ({onSubmit}) => {
 
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  activeCity: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  activeCity: state.currentCity,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
@@ -76,4 +82,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {Login};
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
