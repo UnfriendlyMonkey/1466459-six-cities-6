@@ -8,6 +8,7 @@ import Property from '../property/property';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import PrivateRoute from '../private-route/private-route';
+import LoginRoute from '../private-route/login-route';
 
 const App = (props) => {
 
@@ -62,9 +63,12 @@ const App = (props) => {
           <Route exact path="/">
             <Main />
           </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
+          <LoginRoute
+            exact
+            path="/login"
+            render={() => <Login />}
+          >
+          </LoginRoute>
           <PrivateRoute exact
             path="/favorites"
             render={() => <Favorites />}
