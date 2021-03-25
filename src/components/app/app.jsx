@@ -82,7 +82,7 @@ const App = (props) => {
             <Page404 />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
