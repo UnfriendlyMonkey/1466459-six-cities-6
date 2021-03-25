@@ -1,9 +1,10 @@
 import {ActionCreator} from './action';
 import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
+import {AppRoute, APIRoute} from '../const';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
+  api.get(APIRoute.HOTELS)
     .then(({data}) => data.map(offersAdapter))
     .then((offers) => dispatch(ActionCreator.loadOffers(offers)))
 );
@@ -14,7 +15,7 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 // );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(APIRoute.LOGIN)
     .then(({data}) => {
       return dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.email));
     })
@@ -22,8 +23,16 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 );
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(APIRoute.LOGIN, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, email)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN)))
+    .catch(() => {})
+);
+
+export const logOut = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.LOGOUT)
+    .then(() => {
+      return dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+    })
     .catch(() => {})
 );

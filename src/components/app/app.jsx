@@ -10,6 +10,8 @@ import Page404 from '../page404/page404';
 import PrivateRoute from '../private-route/private-route';
 import LoginRoute from '../private-route/login-route';
 import browserHistory from '../../browser-history';
+import {AppRoute} from '../../const';
+
 
 const App = (props) => {
 
@@ -61,21 +63,21 @@ const App = (props) => {
           </div>
         </header>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             <Main />
           </Route>
           <LoginRoute
             exact
-            path="/login"
+            path={AppRoute.LOGIN}
             render={() => <Login />}
           >
           </LoginRoute>
           <PrivateRoute exact
-            path="/favorites"
+            path={AppRoute.FAVORITES}
             render={() => <Favorites />}
           >
           </PrivateRoute>
-          <Route exact path="/offer/:id">
+          <Route exact path={AppRoute.PROPERTY}>
             <Property />
           </Route>
           <Route>
