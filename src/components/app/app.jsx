@@ -10,11 +10,8 @@ import Page404 from '../page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
 const App = (props) => {
-  // const {locations, offers} = props;
 
   const {login} = props;
-  console.log(props);
-  console.log(login);
 
   let pageClassName = ``;
   switch (window.location.pathname) {
