@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
+import {Switch, Route, Router, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Property from '../property/property';
@@ -9,6 +9,7 @@ import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import PrivateRoute from '../private-route/private-route';
 import LoginRoute from '../private-route/login-route';
+import browserHistory from '../../browser-history';
 
 const App = (props) => {
 
@@ -31,7 +32,7 @@ const App = (props) => {
 
   return (
     <div className={pageClassName}>
-      <BrowserRouter>
+      <Router history={browserHistory}>
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
