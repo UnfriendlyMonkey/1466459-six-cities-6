@@ -8,21 +8,6 @@ import 'leaflet/dist/leaflet.css';
 
 const Map = ({city, points, activeOffer}) => {
 
-  const drawActiveOffer = (offer) => {
-    console.log(offer);
-    const activeIcon = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
-    leaflet
-      .marker({
-        lat: offer.location.latitude,
-        lng: offer.location.longitude
-      }, {activeIcon})
-      .addTo(mapRef.current)
-      .bindPopup(offer.title);
-  };
-
   const mapRef = useRef();
   const coordinates = {
     "Paris": [48.8534, 2.3488],
