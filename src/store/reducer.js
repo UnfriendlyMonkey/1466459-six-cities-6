@@ -9,7 +9,8 @@ const initialState = {
   currentProperty: {},
   // offersToShow: offers.filter((offer) => offer.city.name === `Paris`),
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false
+  isDataLoaded: false,
+  activeOffer: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentCity: action.payload
+      };
+    case ActionType.SET_ACTIVE_OFFER:
+      return {
+        ...state,
+        activeOffer: action.payload
       };
     case ActionType.RESET:
       return {

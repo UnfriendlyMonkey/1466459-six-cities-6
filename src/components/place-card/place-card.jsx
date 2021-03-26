@@ -31,7 +31,7 @@ const PlaceCard = (props) => {
 
   const handleHover = () => {
     if (onHover) {
-      onHover(id);
+      onHover(offer);
     }
   };
 

@@ -1,5 +1,6 @@
 export const ActionType = {
   CHANGE_CITY: `changeCity`,
+  SET_ACTIVE_OFFER: `setActiveOffer`,
   RESET: `reset`,
   LOAD_OFFERS: `loadOffers`,
   // LOAD_PROPERTY: `loadProperty`,
@@ -11,6 +12,10 @@ export const ActionCreator = {
   setActiveCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city,
+  }),
+  setActiveOffer: (offer) => ({
+    type: ActionType.SET_ACTIVE_OFFER,
+    payload: offer,
   }),
   reset: () => ({
     type: ActionType.RESET,

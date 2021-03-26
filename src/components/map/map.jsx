@@ -1,11 +1,27 @@
 import React, {useEffect, useRef} from 'react';
-import {arrayOf, oneOf} from 'prop-types';
+import {connect} from 'react-redux';
+import {arrayOf, object, oneOf} from 'prop-types';
 import leaflet from 'leaflet';
 import {offerType} from '../../types/offer';
 
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({city, points}) => {
+const Map = ({city, points, activeOffer}) => {
+
+  const drawActiveOffer = (offer) => {
+    console.log(offer);
+    const activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 30]
+    });
+    leaflet
+      .marker({
+        lat: offer.location.latitude,
+        lng: offer.location.longitude
+      }, {activeIcon})
+      .addTo(mapRef.current)
+      .bindPopup(offer.title);
+  };
 
   const mapRef = useRef();
   const coordinates = {
@@ -16,6 +32,7 @@ const Map = ({city, points}) => {
     "Hamburg": [53.5753, 10.0153],
     "Dusseldorf": [51.2217, 6.77616]
   };
+
   const icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
@@ -46,10 +63,29 @@ const Map = ({city, points}) => {
         .bindPopup(point.title);
     });
 
+
+    if (Object.keys(activeOffer).length !== 0) {
+      const activeIcon = leaflet.icon({
+        // браузер, почему-то, не отрисовывает эту иконку.
+        // Если этот же адрес использовать в строке 37, например, то находит и отрисовывает правильно
+        // судя по сообщениям в консоли, ищет что-то странное
+        // 2b3e1faf89f94a4835397e7a43b4f77d.png%22)marker-icon-2x.png:1 GET http://localhost:1337/2b3e1faf89f94a4835397e7a43b4f77d.png%22)marker-icon-2x.png 404 (Not Found)
+        iconUrl: `img/pin-active.svg`,
+        iconSize: [30, 30]
+      });
+      leaflet
+        .marker({
+          lat: activeOffer.location.latitude,
+          lng: activeOffer.location.longitude
+        }, {activeIcon})
+        .addTo(mapRef.current)
+        .bindPopup(activeOffer.title);
+    }
+
     return () => {
       mapRef.current.remove();
     };
-  }, [city]);
+  }, [city, activeOffer]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>
@@ -60,7 +96,13 @@ Map.propTypes = {
   city: oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`]),
   points: arrayOf(
       offerType
-  )
+  ),
+  activeOffer: object,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  activeOffer: state.activeOffer,
+});
+
+export {Map};
+export default connect(mapStateToProps, null)(Map);
