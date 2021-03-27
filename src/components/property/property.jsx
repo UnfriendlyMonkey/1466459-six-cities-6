@@ -9,20 +9,26 @@ import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
-const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
-  onLoadProperty(id);
-  onLoadComments(id);
-  onLoadNearPlaces(id);
+  // onLoadProperty(id);
+  // onLoadComments(id);
+  // onLoadNearPlaces(id);
   useEffect(() => {
     onLoadProperty(id);
     onLoadComments(id);
     onLoadNearPlaces(id);
-  }, [activeOffer]);
+  }, [id]);
   const property = activeOffer;
+  if (Object.keys(property).length === 0) {
+    return (
+      <LoadingScreen />
+    );
+  }
   const {images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
   const {avatarUrl, name, isPro} = host;
   const avatarClassName = `property__avatar-wrapper user__avatar-wrapper ${isPro && `property__avatar-wrapper--pro`}`;
@@ -112,7 +118,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
               </div>
             </div>
             <section className="property__reviews reviews">
-              <CommentsList id={id}/>
+              <CommentsList comments={comments}/>
               <CommentForm />
             </section>
           </div>
