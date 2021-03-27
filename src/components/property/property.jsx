@@ -11,7 +11,7 @@ import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
 
 
-const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
   onLoadProperty(id);

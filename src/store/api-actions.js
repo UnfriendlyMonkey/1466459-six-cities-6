@@ -10,7 +10,6 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 );
 
 export const fetchProperty = (id) => (dispatch, _getState, api) => {
-  console.log(id);
   (api.get(`/hotels/${id}`)
     .then(({data}) => offersAdapter(data))
     .then((property) => dispatch(ActionCreator.loadProperty(property)))
