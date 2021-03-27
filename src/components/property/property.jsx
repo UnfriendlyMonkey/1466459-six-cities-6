@@ -1,23 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 
-import {arrayOf} from 'prop-types';
-import {offerType} from '../../types/offer';
+import {object, func, array} from 'prop-types';
+// import {offerType} from '../../types/offer';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
+import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
 
 
-const Property = ({offers}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
-  const property = offers.filter((offer) => offer.id === id)[0];
+  onLoadProperty(id);
+  onLoadComments(id);
+  onLoadNearPlaces(id);
+  useEffect(() => {
+    onLoadProperty(id);
+    onLoadComments(id);
+    onLoadNearPlaces(id);
+  }, [activeOffer]);
+  const property = activeOffer;
   const {images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
   const {avatarUrl, name, isPro} = host;
   const avatarClassName = `property__avatar-wrapper user__avatar-wrapper ${isPro && `property__avatar-wrapper--pro`}`;
-  const nearPlaces = offers.filter((offer) => offer !== property && offer.city.name === property.city.name);
+  // const nearPlaces = offers.filter((offer) => offer !== property && offer.city.name === property.city.name);
 
   return (
     <main className="page__main page__main--property">
@@ -123,14 +132,31 @@ const Property = ({offers}) => {
 };
 
 Property.propTypes = {
-  offers: arrayOf(
-      offerType
-  ).isRequired
+  activeOffer: object.isRequired,
+  onLoadProperty: func.isRequired,
+  onLoadComments: func.isRequired,
+  onLoadNearPlaces: func.isRequired,
+  nearPlaces: array,
+  comments: array,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  activeOffer: state.activeOffer,
+  nearPlaces: state.nearPlaces,
+  comments: state.comments,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadProperty(id) {
+    dispatch(fetchProperty(id));
+  },
+  onLoadComments(id) {
+    dispatch(fetchComments(id));
+  },
+  onLoadNearPlaces(id) {
+    dispatch(fetchNearPlaces(id));
+  },
 });
 
 export {Property};
-export default connect(mapStateToProps, null)(Property);
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

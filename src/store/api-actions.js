@@ -9,10 +9,24 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
     .then((offers) => dispatch(ActionCreator.loadOffers(offers)))
 );
 
-// export const fetchProperty = ({id}) => (dispatch, _getState, api) => (
-//   api.get(`/hotels/${id}`)
-//     .then(({data}) => dispatch(ActionCreator.loadProperty(data)))
-// );
+export const fetchProperty = (id) => (dispatch, _getState, api) => {
+  console.log(id);
+  (api.get(`/hotels/${id}`)
+    .then(({data}) => offersAdapter(data))
+    .then((property) => dispatch(ActionCreator.loadProperty(property)))
+  );
+};
+
+export const fetchComments = (id) => (dispatch, _getState, api) => (
+  api.get(`/comments/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+);
+
+export const fetchNearPlaces = (id) => (dispatch, _getState, api) => (
+  api.get(`/hotels/${id}/nearby`)
+    .then(({data}) => data.map(offersAdapter))
+    .then((offers) => dispatch(ActionCreator.loadNearPlaces(offers)))
+);
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)

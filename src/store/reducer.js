@@ -11,6 +11,8 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   activeOffer: {},
+  comments: [],
+  nearPlaces: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,11 +37,21 @@ const reducer = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true
       };
-    // case ActionType.LOAD_PROPERTY:
-    //   return {
-    //     ...state,
-    //     currentProperty: action.payload
-    //   };
+    case ActionType.LOAD_PROPERTY:
+      return {
+        ...state,
+        activeOffer: action.payload
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
+      };
+    case ActionType.LOAD_NEAR_PLACES:
+      return {
+        ...state,
+        nearPlaces: action.payload
+      };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
