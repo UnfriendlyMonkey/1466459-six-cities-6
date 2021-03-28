@@ -15,9 +15,6 @@ import LoadingScreen from '../loading-screen/loading-screen';
 const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
-  // onLoadProperty(id);
-  // onLoadComments(id);
-  // onLoadNearPlaces(id);
   useEffect(() => {
     onLoadProperty(id);
     onLoadComments(id);
@@ -32,7 +29,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
   const {images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
   const {avatarUrl, name, isPro} = host;
   const avatarClassName = `property__avatar-wrapper user__avatar-wrapper ${isPro && `property__avatar-wrapper--pro`}`;
-  // const nearPlaces = offers.filter((offer) => offer !== property && offer.city.name === property.city.name);
+  const pointsForMap = nearPlaces.concat(property);
 
   return (
     <main className="page__main page__main--property">
@@ -124,7 +121,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
           </div>
         </div>
         <section className="property__map map">
-          <Map city={property.city.name} points={nearPlaces}/>
+          <Map city={property.city.name} points={pointsForMap}/>
         </section>
       </section>
       <div className="container">

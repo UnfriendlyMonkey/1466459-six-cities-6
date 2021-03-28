@@ -51,10 +51,6 @@ const Map = ({city, points, activeOffer}) => {
 
     if (Object.keys(activeOffer).length !== 0) {
       const activeIcon = leaflet.icon({
-        // браузер, почему-то, не отрисовывает эту иконку.
-        // Если этот же адрес использовать в строке 37, например, то находит и отрисовывает правильно
-        // судя по сообщениям в консоли, ищет что-то странное
-        // 2b3e1faf89f94a4835397e7a43b4f77d.png%22)marker-icon-2x.png:1 GET http://localhost:1337/2b3e1faf89f94a4835397e7a43b4f77d.png%22)marker-icon-2x.png 404 (Not Found)
         iconUrl: `img/pin-active.svg`,
         iconSize: [30, 30]
       });
@@ -62,7 +58,7 @@ const Map = ({city, points, activeOffer}) => {
         .marker({
           lat: activeOffer.location.latitude,
           lng: activeOffer.location.longitude
-        }, {activeIcon})
+        }, {icon: activeIcon})
         .addTo(mapRef.current)
         .bindPopup(activeOffer.title);
     }
