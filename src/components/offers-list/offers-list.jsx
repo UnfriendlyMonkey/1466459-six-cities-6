@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
+import {ActionCreator} from '../../store/action';
 
 const OffersList = (props) => {
-  const {offers, from = `main`} = props;
-  const setActiveOffer = useState(null)[1];
+  const {offers, from = `main`, setActiveOffer} = props;
+  // const setActiveOffer = useState(null)[1];
   let divClassName = `places__list`;
 
   switch (from) {
@@ -32,7 +34,15 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
-  from: PropTypes.oneOf([`main`, `favorites`, `property`])
+  from: PropTypes.oneOf([`main`, `favorites`, `property`]),
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
-export default OffersList;
+const mapDispatchToProps = (dispatch) => ({
+  setActiveOffer(offer) {
+    dispatch(ActionCreator.setActiveOffer(offer));
+  },
+});
+
+export {OffersList};
+export default connect(null, mapDispatchToProps)(OffersList);

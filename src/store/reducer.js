@@ -1,11 +1,18 @@
-import offers from '../mocks/offers';
+// import offers from '../mocks/offers';
 import {ActionType} from './action';
+import {AuthorizationStatus} from '../const';
 
 const initialState = {
   locations: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
   currentCity: `Paris`,
-  offers,
-  offersToShow: offers.filter((offer) => offer.city.name === `Paris`)
+  offers: [],
+  currentProperty: {},
+  // offersToShow: offers.filter((offer) => offer.city.name === `Paris`),
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isDataLoaded: false,
+  activeOffer: {},
+  comments: [],
+  nearPlaces: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,9 +22,41 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentCity: action.payload
       };
+    case ActionType.SET_ACTIVE_OFFER:
+      return {
+        ...state,
+        activeOffer: action.payload
+      };
     case ActionType.RESET:
       return {
         ...initialState
+      };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isDataLoaded: true
+      };
+    case ActionType.LOAD_PROPERTY:
+      return {
+        ...state,
+        activeOffer: action.payload
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
+      };
+    case ActionType.LOAD_NEAR_PLACES:
+      return {
+        ...state,
+        nearPlaces: action.payload
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload.status,
+        login: action.payload.login
       };
   }
   return state;

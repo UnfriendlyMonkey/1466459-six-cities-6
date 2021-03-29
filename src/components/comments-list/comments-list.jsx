@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CommentCard from '../comment-card/comment-card';
-import comments from '../../mocks/comments';
+// import comments from '../../mocks/comments';
 
-const CommentsList = ({id}) => {
+const CommentsList = ({comments}) => {
 
-  const items = comments.filter((item) => item.propertyId === id);
+  // const items = comments.filter((item) => item.propertyId === id);
 
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{items.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
       <ul className="reviews__list">
-        {items.map((item) => (
+        {comments.map((item) => (
           <CommentCard key={item.id} item={item} />
         ))}
       </ul>
@@ -20,7 +20,7 @@ const CommentsList = ({id}) => {
 };
 
 CommentsList.propTypes = {
-  id: PropTypes.number.isRequired
+  comments: PropTypes.array.isRequired
 };
 
 export default CommentsList;

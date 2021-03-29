@@ -1,11 +1,12 @@
 import React, {useEffect, useRef} from 'react';
-import {arrayOf, oneOf} from 'prop-types';
+import {connect} from 'react-redux';
+import {arrayOf, object, oneOf} from 'prop-types';
 import leaflet from 'leaflet';
 import {offerType} from '../../types/offer';
 
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({city, points}) => {
+const Map = ({city, points, activeOffer}) => {
 
   const mapRef = useRef();
   const coordinates = {
@@ -16,6 +17,7 @@ const Map = ({city, points}) => {
     "Hamburg": [53.5753, 10.0153],
     "Dusseldorf": [51.2217, 6.77616]
   };
+
   const icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
@@ -46,10 +48,25 @@ const Map = ({city, points}) => {
         .bindPopup(point.title);
     });
 
+
+    if (Object.keys(activeOffer).length !== 0) {
+      const activeIcon = leaflet.icon({
+        iconUrl: `img/pin-active.svg`,
+        iconSize: [30, 30]
+      });
+      leaflet
+        .marker({
+          lat: activeOffer.location.latitude,
+          lng: activeOffer.location.longitude
+        }, {icon: activeIcon})
+        .addTo(mapRef.current)
+        .bindPopup(activeOffer.title);
+    }
+
     return () => {
       mapRef.current.remove();
     };
-  }, [city]);
+  }, [city, activeOffer]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>
@@ -60,7 +77,13 @@ Map.propTypes = {
   city: oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`]),
   points: arrayOf(
       offerType
-  )
+  ),
+  activeOffer: object,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  activeOffer: state.activeOffer,
+});
+
+export {Map};
+export default connect(mapStateToProps, null)(Map);

@@ -1,23 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 
-import {arrayOf} from 'prop-types';
-import {offerType} from '../../types/offer';
+import {object, func, array} from 'prop-types';
+// import {offerType} from '../../types/offer';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
+import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
-const Property = ({offers}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
-  const property = offers.filter((offer) => offer.id === id)[0];
+  useEffect(() => {
+    onLoadProperty(id);
+    onLoadComments(id);
+    onLoadNearPlaces(id);
+  }, [id]);
+  const property = activeOffer;
+  if (Object.keys(property).length === 0) {
+    return (
+      <LoadingScreen />
+    );
+  }
   const {images, type, isPremium, isFavorite, title, rating, bedrooms, maxAdults, price, goods, host, description} = property;
   const {avatarUrl, name, isPro} = host;
   const avatarClassName = `property__avatar-wrapper user__avatar-wrapper ${isPro && `property__avatar-wrapper--pro`}`;
-  const nearPlaces = offers.filter((offer) => offer !== property && offer.city.name === property.city.name);
+  const pointsForMap = nearPlaces.concat(property);
 
   return (
     <main className="page__main page__main--property">
@@ -103,13 +115,13 @@ const Property = ({offers}) => {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <CommentsList id={id}/>
+              <CommentsList comments={comments}/>
               <CommentForm />
             </section>
           </div>
         </div>
         <section className="property__map map">
-          <Map city={property.city.name} points={nearPlaces}/>
+          <Map city={property.city.name} points={pointsForMap}/>
         </section>
       </section>
       <div className="container">
@@ -123,14 +135,31 @@ const Property = ({offers}) => {
 };
 
 Property.propTypes = {
-  offers: arrayOf(
-      offerType
-  ).isRequired
+  activeOffer: object.isRequired,
+  onLoadProperty: func.isRequired,
+  onLoadComments: func.isRequired,
+  onLoadNearPlaces: func.isRequired,
+  nearPlaces: array,
+  comments: array,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  activeOffer: state.activeOffer,
+  nearPlaces: state.nearPlaces,
+  comments: state.comments,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadProperty(id) {
+    dispatch(fetchProperty(id));
+  },
+  onLoadComments(id) {
+    dispatch(fetchComments(id));
+  },
+  onLoadNearPlaces(id) {
+    dispatch(fetchNearPlaces(id));
+  },
 });
 
 export {Property};
-export default connect(mapStateToProps, null)(Property);
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

@@ -1,13 +1,21 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Switch, Route, Router, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Property from '../property/property';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
+import PrivateRoute from '../private-route/private-route';
+import LoginRoute from '../private-route/login-route';
+import browserHistory from '../../browser-history';
+import {AppRoute} from '../../const';
 
-const App = () => {
-  // const {locations, offers} = props;
+
+const App = (props) => {
+
+  const {login} = props;
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -26,7 +34,7 @@ const App = () => {
 
   return (
     <div className={pageClassName}>
-      <BrowserRouter>
+      <Router history={browserHistory}>
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
@@ -40,11 +48,14 @@ const App = () => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link
+                      className="header__nav-link header__nav-link--profile"
+                      to={login === `` ? AppRoute.LOGIN : AppRoute.FAVORITES}
+                    >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                      <span className="header__user-name user__name">{login === `` ? `Sign in` : login}</span>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -52,25 +63,39 @@ const App = () => {
           </div>
         </header>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             <Main />
           </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/favorites">
-            <Favorites />
-          </Route>
-          <Route exact path="/offer/:id">
+          <LoginRoute
+            exact
+            path={AppRoute.LOGIN}
+            render={() => <Login />}
+          >
+          </LoginRoute>
+          <PrivateRoute exact
+            path={AppRoute.FAVORITES}
+            render={() => <Favorites />}
+          >
+          </PrivateRoute>
+          <Route exact path={AppRoute.PROPERTY}>
             <Property />
           </Route>
           <Route>
             <Page404 />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
 
-export default App;
+App.propTypes = {
+  login: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);
