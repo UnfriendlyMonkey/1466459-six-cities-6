@@ -71,8 +71,8 @@ Login.propTypes = {
   activeCity: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.currentCity,
+const mapStateToProps = ({OFFERS}) => ({
+  activeCity: OFFERS.currentCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({

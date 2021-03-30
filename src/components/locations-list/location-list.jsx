@@ -39,9 +39,9 @@ LocationsList.propTypes = {
   changeActiveCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  locations: state.locations,
-  activeCity: state.currentCity,
+const mapStateToProps = ({OFFERS}) => ({
+  locations: OFFERS.locations,
+  activeCity: OFFERS.currentCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({

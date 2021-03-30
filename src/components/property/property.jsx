@@ -143,10 +143,10 @@ Property.propTypes = {
   comments: array,
 };
 
-const mapStateToProps = (state) => ({
-  activeOffer: state.activeOffer,
-  nearPlaces: state.nearPlaces,
-  comments: state.comments,
+const mapStateToProps = ({PROPERTY}) => ({
+  activeOffer: PROPERTY.activeOffer,
+  nearPlaces: PROPERTY.nearPlaces,
+  comments: PROPERTY.comments,
 });
 
 const mapDispatchToProps = (dispatch) => ({

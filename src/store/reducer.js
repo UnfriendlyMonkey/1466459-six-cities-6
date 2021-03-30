@@ -1,63 +1,16 @@
-import {ActionType} from './action';
-import {AuthorizationStatus} from '../const';
+import {combineReducers} from 'redux';
+import {user} from './user/user';
+import {offers} from './offers/offers';
+import {property} from './property/property';
 
-const initialState = {
-  locations: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
-  currentCity: `Paris`,
-  offers: [],
-  currentProperty: {},
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false,
-  activeOffer: {},
-  comments: [],
-  nearPlaces: [],
+export const NameSpace = {
+  USER: `USER`,
+  OFFERS: `OFFERS`,
+  PROPERTY: `PROPERTY`,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CHANGE_CITY:
-      return {
-        ...state,
-        currentCity: action.payload
-      };
-    case ActionType.SET_ACTIVE_OFFER:
-      return {
-        ...state,
-        activeOffer: action.payload
-      };
-    case ActionType.RESET:
-      return {
-        ...initialState
-      };
-    case ActionType.LOAD_OFFERS:
-      return {
-        ...state,
-        offers: action.payload,
-        isDataLoaded: true
-      };
-    case ActionType.LOAD_PROPERTY:
-      return {
-        ...state,
-        activeOffer: action.payload
-      };
-    case ActionType.LOAD_COMMENTS:
-      return {
-        ...state,
-        comments: action.payload
-      };
-    case ActionType.LOAD_NEAR_PLACES:
-      return {
-        ...state,
-        nearPlaces: action.payload
-      };
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return {
-        ...state,
-        authorizationStatus: action.payload.status,
-        login: action.payload.login
-      };
-  }
-  return state;
-};
-
-export {reducer};
+export default combineReducers({
+  [NameSpace.USER]: user,
+  [NameSpace.OFFERS]: offers,
+  [NameSpace.PROPERTY]: property,
+});

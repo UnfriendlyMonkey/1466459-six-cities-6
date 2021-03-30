@@ -93,8 +93,8 @@ App.propTypes = {
   login: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  login: state.login,
+const mapStateToProps = ({USER}) => ({
+  login: USER.login,
 });
 
 export {App};
