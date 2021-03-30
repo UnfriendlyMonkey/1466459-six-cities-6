@@ -12,11 +12,18 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `requiredAuthorization`,
   REDIRECT_TO_ROUTE: `redirectToRoute`,
   UPDATE_PROPERTY: `updateProperty`,
+  CHANGE_SORTING_TYPE: `changeSortingType`,
 };
 
 export const setActiveCity = createAction(ActionType.CHANGE_CITY, (city) => {
   return {
     payload: city,
+  };
+});
+
+export const changeSortingType = createAction(ActionType.CHANGE_SORTING_TYPE, (sortedBy) => {
+  return {
+    payload: sortedBy
   };
 });
 
