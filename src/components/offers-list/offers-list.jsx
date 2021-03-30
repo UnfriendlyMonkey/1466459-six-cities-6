@@ -6,7 +6,7 @@ import PlaceCard from '../place-card/place-card';
 import {setActiveOffer} from '../../store/action';
 
 const OffersList = (props) => {
-  const {offers, from = `main`, setActiveOffer} = props;
+  const {offers, from = `main`, changeActiveOffer} = props;
   let divClassName = `places__list`;
 
   switch (from) {
@@ -20,7 +20,7 @@ const OffersList = (props) => {
   return (
     <div className={divClassName}>
       {offers.map((offer) => (
-        <PlaceCard key={offer.id} offer={offer} onHover={setActiveOffer} from={from}/>
+        <PlaceCard key={offer.id} offer={offer} onHover={changeActiveOffer} from={from}/>
       ))}
     </div>
   );
@@ -31,11 +31,11 @@ OffersList.propTypes = {
       offerType
   ).isRequired,
   from: PropTypes.oneOf([`main`, `favorites`, `property`]),
-  setActiveOffer: PropTypes.func.isRequired,
+  changeActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveOffer(offer) {
+  changeActiveOffer(offer) {
     dispatch(setActiveOffer(offer));
   },
 });

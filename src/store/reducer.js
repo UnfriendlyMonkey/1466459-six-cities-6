@@ -1,4 +1,3 @@
-// import offers from '../mocks/offers';
 import {ActionType} from './action';
 import {AuthorizationStatus} from '../const';
 
@@ -7,7 +6,6 @@ const initialState = {
   currentCity: `Paris`,
   offers: [],
   currentProperty: {},
-  // offersToShow: offers.filter((offer) => offer.city.name === `Paris`),
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   activeOffer: {},
