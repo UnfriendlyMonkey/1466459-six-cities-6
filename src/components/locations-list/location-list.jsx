@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {setActiveCity} from '../../store/action';
 
 const LocationsList = (props) => {
-  const {locations, activeCity, setActiveCity} = props;
+  const {locations, activeCity, changeActiveCity} = props;
 
   return (
     <>
@@ -18,7 +18,7 @@ const LocationsList = (props) => {
                   className={item === activeCity ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`}
                   href="#"
                   onClick={({target}) => {
-                    setActiveCity(target.textContent);
+                    changeActiveCity(target.textContent);
                   }}>
                   <span>{item}</span>
                 </a>
@@ -36,7 +36,7 @@ LocationsList.propTypes = {
       PropTypes.string
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
-  setActiveCity: PropTypes.func.isRequired,
+  changeActiveCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -45,11 +45,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveCity(city) {
-    dispatch(ActionCreator.setActiveCity(city));
+  changeActiveCity(city) {
+    dispatch(setActiveCity(city));
   },
 });
 
 export {LocationsList};
 export default connect(mapStateToProps, mapDispatchToProps)(LocationsList);
-// export default LocationsList;

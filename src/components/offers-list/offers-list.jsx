@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
-import {ActionCreator} from '../../store/action';
+import {setActiveOffer} from '../../store/action';
 
 const OffersList = (props) => {
   const {offers, from = `main`, setActiveOffer} = props;
-  // const setActiveOffer = useState(null)[1];
   let divClassName = `places__list`;
 
   switch (from) {
@@ -17,9 +16,6 @@ const OffersList = (props) => {
     default:
       divClassName += ` cities__places-list tabs__content`;
   }
-
-  // console.log(activeOffer);
-  // может логичнее сюда и карту перенести тогда, иначе непонятно, где и как это состояние использовать?
 
   return (
     <div className={divClassName}>
@@ -40,7 +36,7 @@ OffersList.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveOffer(offer) {
-    dispatch(ActionCreator.setActiveOffer(offer));
+    dispatch(setActiveOffer(offer));
   },
 });
 
