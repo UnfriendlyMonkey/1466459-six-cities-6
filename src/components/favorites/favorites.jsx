@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {offerType} from '../../types/offer';
 import FavoritesCity from './favorites-city';
+import {getOffers} from '../../store/offers/selectors';
 
 
 const Favorites = (props) => {
@@ -32,8 +33,8 @@ Favorites.propTypes = {
   )
 };
 
-const mapStateToProps = ({OFFERS}) => ({
-  offers: OFFERS.offers,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
 });
 
 export {Favorites};

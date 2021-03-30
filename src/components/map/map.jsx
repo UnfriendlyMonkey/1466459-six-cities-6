@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {arrayOf, object, oneOf} from 'prop-types';
 import leaflet from 'leaflet';
 import {offerType} from '../../types/offer';
+import {getActiveOffer} from '../../store/property/selectors';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -81,8 +82,8 @@ Map.propTypes = {
   activeOffer: object,
 };
 
-const mapStateToProps = ({PROPERTY}) => ({
-  activeOffer: PROPERTY.activeOffer,
+const mapStateToProps = (state) => ({
+  activeOffer: getActiveOffer(state),
 });
 
 export {Map};

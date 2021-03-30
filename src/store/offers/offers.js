@@ -5,6 +5,7 @@ const initialState = {
   currentCity: `Paris`,
   offers: [],
   isDataLoaded: false,
+  sortedBy: `Popular`,
 };
 
 const offers = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const offers = (state = initialState, action) => {
       return {
         ...state,
         offers: offers.splice(index, 1, action.payload)
+      };
+    case ActionType.CHANGE_SORTING_TYPE:
+      return {
+        ...state,
+        sortedBy: action.payload
       };
   }
 

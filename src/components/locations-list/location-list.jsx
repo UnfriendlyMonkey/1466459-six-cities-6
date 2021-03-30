@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {setActiveCity} from '../../store/action';
+import {getLocations, getCurrentCity} from '../../store/offers/selectors';
 
 const LocationsList = (props) => {
   const {locations, activeCity, changeActiveCity} = props;
@@ -39,9 +40,9 @@ LocationsList.propTypes = {
   changeActiveCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({OFFERS}) => ({
-  locations: OFFERS.locations,
-  activeCity: OFFERS.currentCity,
+const mapStateToProps = (state) => ({
+  locations: getLocations(state),
+  activeCity: getCurrentCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

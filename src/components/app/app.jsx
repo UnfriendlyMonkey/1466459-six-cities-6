@@ -11,6 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 import LoginRoute from '../private-route/login-route';
 import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
+import {getLogin} from '../../store/user/selectors';
 
 
 const App = (props) => {
@@ -93,8 +94,8 @@ App.propTypes = {
   login: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  login: USER.login,
+const mapStateToProps = (state) => ({
+  login: getLogin(state),
 });
 
 export {App};

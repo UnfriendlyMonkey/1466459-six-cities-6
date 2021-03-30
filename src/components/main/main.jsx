@@ -8,6 +8,7 @@ import Map from '../map/map';
 import LocationsList from '../locations-list/location-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOffers} from '../../store/api-actions';
+import {getOffers, getCurrentCity, getLoadedDataStatus} from '../../store/offers/selectors';
 
 
 const Main = (props) => {
@@ -71,10 +72,10 @@ Main.propTypes = {
   onLoadData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({OFFERS}) => ({
-  offers: OFFERS.offers,
-  activeCity: OFFERS.currentCity,
-  isDataLoaded: OFFERS.isDataLoaded,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+  activeCity: getCurrentCity(state),
+  isDataLoaded: getLoadedDataStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

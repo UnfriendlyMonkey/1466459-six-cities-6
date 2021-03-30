@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {login} from '../../store/api-actions';
+import {getCurrentCity} from '../../store/offers/selectors';
 
 const Login = ({onSubmit, activeCity}) => {
 
@@ -71,8 +72,8 @@ Login.propTypes = {
   activeCity: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({OFFERS}) => ({
-  activeCity: OFFERS.currentCity,
+const mapStateToProps = (state) => ({
+  activeCity: getCurrentCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

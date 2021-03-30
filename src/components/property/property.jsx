@@ -10,6 +10,7 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
 
 
 const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
@@ -143,10 +144,10 @@ Property.propTypes = {
   comments: array,
 };
 
-const mapStateToProps = ({PROPERTY}) => ({
-  activeOffer: PROPERTY.activeOffer,
-  nearPlaces: PROPERTY.nearPlaces,
-  comments: PROPERTY.comments,
+const mapStateToProps = (state) => ({
+  activeOffer: getActiveOffer(state),
+  nearPlaces: getNearPlaces(state),
+  comments: getComments(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
