@@ -15,7 +15,7 @@ const user = createReducer(initialState, (builder) => {
   });
   builder.addCase(loadFavorite, (state, action) => {
     state.favorite = action.payload;
-  })
+  });
 });
 
 // const user = (state = initialState, action) => {

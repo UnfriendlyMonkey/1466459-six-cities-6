@@ -1,4 +1,4 @@
-import {loadOffers, loadProperty, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, updateProperty} from './action';
+import {loadOffers, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, updateProperty, setActiveOffer} from './action';
 import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
 import {commentsAdapterToClient} from '../services/comments-adapter';
@@ -13,7 +13,8 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 export const fetchProperty = (id) => (dispatch, _getState, api) => {
   (api.get(`/hotels/${id}`)
     .then(({data}) => offersAdapter(data))
-    .then((property) => dispatch(loadProperty(property)))
+    // .then((property) => dispatch(loadProperty(property)))
+    .then((property) => dispatch(setActiveOffer(property)))
   );
 };
 

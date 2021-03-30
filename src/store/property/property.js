@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveOffer, loadProperty, loadComments, loadNearPlaces} from '../action';
+import {setActiveOffer, loadComments, loadNearPlaces} from '../action';
 
 const initialState = {
   currentProperty: {},
@@ -13,9 +13,9 @@ const property = createReducer(initialState, (builder) => {
     state.activeOffer = action.payload;
   });
   // one of them is unnecessary
-  builder.addCase(loadProperty, (state, action) => {
-    state.activeOffer = action.payload;
-  });
+  // builder.addCase(loadProperty, (state, action) => {
+  //   state.activeOffer = action.payload;
+  // });
   builder.addCase(loadComments, (state, action) => {
     state.comments = action.payload;
   });

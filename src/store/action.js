@@ -39,11 +39,11 @@ export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => {
   };
 });
 
-export const loadProperty = createAction(ActionType.LOAD_PROPERTY, (property) => {
-  return {
-    payload: property
-  };
-});
+// export const loadProperty = createAction(ActionType.LOAD_PROPERTY, (property) => {
+//   return {
+//     payload: property
+//   };
+// });
 
 export const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => {
   return {
