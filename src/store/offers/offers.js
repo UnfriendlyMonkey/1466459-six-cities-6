@@ -20,6 +20,12 @@ const offers = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true
       };
+    case ActionType.UPDATE_PROPERTY:
+      const index = state.offers.find((offer) => offer.id === action.payload.id);
+      return {
+        ...state,
+        offers: offers.splice(index, 1, action.payload)
+      };
   }
 
   return state;

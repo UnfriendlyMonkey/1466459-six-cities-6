@@ -6,8 +6,10 @@ export const ActionType = {
   LOAD_PROPERTY: `loadProperty`,
   LOAD_COMMENTS: `loadComments`,
   LOAD_NEAR_PLACES: `loadNearPlaces`,
+  LOAD_FAVORITE: `loadFavorite`,
   REQUIRED_AUTHORIZATION: `requiredAuthorization`,
   REDIRECT_TO_ROUTE: `redirectToRoute`,
+  UPDATE_PROPERTY: `updateProperty`,
 };
 
 export const setActiveCity = (city) => ({
@@ -38,6 +40,16 @@ export const loadComments = (comments) => ({
 export const loadNearPlaces = (offers) => ({
   type: ActionType.LOAD_NEAR_PLACES,
   payload: offers
+});
+
+export const loadFavorite = (offers) => ({
+  type: ActionType.LOAD_FAVORITE,
+  payload: offers
+});
+
+export const updateProperty = (property) => ({
+  type: ActionType.UPDATE_PROPERTY,
+  payload: property
 });
 
 export const requireAuthorization = (status, login = ``) => ({

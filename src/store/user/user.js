@@ -4,6 +4,7 @@ import {AuthorizationStatus} from '../../const';
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   login: ``,
+  favorite: [],
 };
 
 const user = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const user = (state = initialState, action) => {
         ...state,
         authorizationStatus: action.payload.status,
         login: action.payload.login
+      };
+    case ActionType.LOAD_FAVORITE:
+      return {
+        ...state,
+        favorite: action.payload
       };
   }
 

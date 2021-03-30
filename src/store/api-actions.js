@@ -1,4 +1,4 @@
-import {loadOffers, loadProperty, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute} from './action';
+import {loadOffers, loadProperty, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, updateProperty} from './action';
 import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
 import {commentsAdapterToClient} from '../services/comments-adapter';
@@ -49,5 +49,27 @@ export const logOut = () => (dispatch, _getState, api) => (
     .then(() => {
       return dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
     })
+    .catch(() => {})
+);
+
+export const fetchFavorite = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => data.map(offersAdapter))
+    .then((offers) => dispatch(loadNearPlaces(offers)))
+    .catch(() => {})
+);
+
+export const setFavorite = (id, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${id}/${status}`)
+  // что делать, если действие вызвано из других списков (например, nearPlaces)?
+    .then(({data}) => offersAdapter(data))
+    .then((offer) => dispatch(updateProperty(offer)))
+    .catch(() => {})
+);
+
+export const postCommetn = (id, comment) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, comment)
+    .then(({data}) => data.map(commentsAdapterToClient))
+    .then((comments) => dispatch(loadComments(comments)))
     .catch(() => {})
 );
