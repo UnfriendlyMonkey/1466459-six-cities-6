@@ -68,7 +68,7 @@ export const setFavorite = (id, status) => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const postCommetn = (id, comment) => (dispatch, _getState, api) => (
+export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`/comments/${id}`, comment)
     .then(({data}) => data.map(commentsAdapterToClient))
     .then((comments) => dispatch(loadComments(comments)))

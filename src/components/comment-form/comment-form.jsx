@@ -1,11 +1,23 @@
-import React, {useState} from 'react';
+import {func, number} from 'prop-types';
+import React, {useRef, useState} from 'react';
+import {connect} from 'react-redux';
+import {postComment} from '../../store/api-actions';
 
-const CommentForm = () => {
+const CommentForm = ({id, handleSubmit}) => {
+  const commentForm = useRef();
   const [rating, setRating] = useState(null);
   const [comment, setComment] = useState(``);
 
-  const handleSubmit = (evt) => {
+  const handleCommentSubmit = (evt) => {
     evt.preventDefault();
+    const newComment = {
+      "comment": comment,
+      "rating": rating
+    };
+    handleSubmit(id, newComment);
+    setRating(null);
+    setComment(``);
+    commentForm.current.reset();
   };
 
   const handleRatingChange = ({target}) => {
@@ -21,7 +33,7 @@ const CommentForm = () => {
   const stars = [[`5`, `perfect`], [`4`, `good`], [`3`, `not bad`], [`2`, `badly`], [`1`, `terribly`]];
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleCommentSubmit} ref={commentForm}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
 
@@ -43,7 +55,7 @@ const CommentForm = () => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleCommentChange}></textarea>
-      <div className="reviews__button-wrapper">
+      <div className="reviews__button-wrapper">в
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
@@ -53,4 +65,16 @@ const CommentForm = () => {
   );
 };
 
-export default CommentForm;
+CommentForm.propTypes = {
+  id: number.isRequired,
+  handleSubmit: func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  handleSubmit(id, newComment) {
+    dispatch(postComment(id, newComment));
+  }
+});
+
+export {CommentForm};
+export default connect(null, mapDispatchToProps)(CommentForm);

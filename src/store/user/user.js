@@ -18,22 +18,4 @@ const user = createReducer(initialState, (builder) => {
   });
 });
 
-// const user = (state = initialState, action) => {
-//   switch (action.type) {
-//     case ActionType.REQUIRED_AUTHORIZATION:
-//       return {
-//         ...state,
-//         authorizationStatus: action.payload.status,
-//         login: action.payload.login
-//       };
-//     case ActionType.LOAD_FAVORITE:
-//       return {
-//         ...state,
-//         favorite: action.payload
-//       };
-//   }
-
-//   return state;
-// };
-
 export {user};

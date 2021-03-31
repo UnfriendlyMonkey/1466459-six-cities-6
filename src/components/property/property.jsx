@@ -118,7 +118,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
             </div>
             <section className="property__reviews reviews">
               <CommentsList comments={comments}/>
-              <CommentForm />
+              <CommentForm id={id}/>
             </section>
           </div>
         </div>
