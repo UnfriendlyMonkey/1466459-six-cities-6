@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {func, string} from "prop-types";
 import {changeSortingType} from "../../store/action";
 import {getSortingOrder} from "../../store/offers/selectors";
+import {SortingType} from '../../const';
 
 const PlacesSort = ({activeSorting, onSortingChange}) => {
+
+  const options = Object.values(SortingType);
 
   const [hovered, setHovered] = useState(false);
 
@@ -15,19 +18,28 @@ const PlacesSort = ({activeSorting, onSortingChange}) => {
       action="#"
       method="get"
       onMouseEnter={() => setHovered(true)}>
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by: </span>
       <span className="places__sorting-type" tabIndex="0">
-        Popular
+        {activeSorting}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
       <ul className={className}
         onMouseLeave={() => setHovered(false)}>
-        <li className="places__option places__option--active" tabIndex="0">Popular</li>
-        <li className="places__option" tabIndex="0">Price: low to high</li>
-        <li className="places__option" tabIndex="0">Price: high to low</li>
-        <li className="places__option" tabIndex="0">Top rated first</li>
+        {options.map((item, index) => {
+          const activeOption = item === activeSorting
+            ? `places__option--active`
+            : ``;
+          return (
+            <li key={item + index}
+              className={`places__option ${activeOption}`}
+              tabIndex="0"
+              onClick={onSortingChange}>
+              {item}
+            </li>
+          );
+        })}
       </ul>
     </form>
   );
@@ -43,8 +55,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortingChange() {
-    dispatch(changeSortingType());
+  onSortingChange(evt) {
+    dispatch(changeSortingType(evt.target.textContent));
   },
 });
 
