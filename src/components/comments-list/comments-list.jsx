@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CommentCard from '../comment-card/comment-card';
-// import comments from '../../mocks/comments';
 
 const CommentsList = ({comments}) => {
-
-  // const items = comments.filter((item) => item.propertyId === id);
 
   return (
     <>

@@ -17,3 +17,10 @@ export const APIRoute = {
   FAVORITE: `/favorite`,
   COMMENTS: `/comments`,
 };
+
+export const SortingType = {
+  POPULAR: `Popular`,
+  TOP_RATED: `Top rated first`,
+  PRICE_DESC: `Price: high to low`,
+  PRICE_ASC: `Price: low to high`,
+};
