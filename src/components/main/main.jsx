@@ -8,12 +8,12 @@ import Map from '../map/map';
 import LocationsList from '../locations-list/location-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOffers} from '../../store/api-actions';
-import {getOffers, getCurrentCity, getLoadedDataStatus} from '../../store/offers/selectors';
+import {getCurrentCity, getLoadedDataStatus, getSortingOrder, getSortedOffers} from '../../store/offers/selectors';
 import PlacesSort from '../places-sort/places-sort';
 
 
 const Main = (props) => {
-  const {offers, activeCity, isDataLoaded, onLoadData} = props;
+  const {offers, activeCity, isDataLoaded, onLoadData, sortingOrder} = props;
   const placesFound = offers.filter((offer) => offer.city.name === activeCity).length;
 
   useEffect(() => {
@@ -21,6 +21,9 @@ const Main = (props) => {
       onLoadData();
     }
   }, [isDataLoaded]);
+  useEffect(() => {
+
+  }, [sortingOrder]);
 
   if (!isDataLoaded) {
     return (
@@ -57,12 +60,14 @@ Main.propTypes = {
   activeCity: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  sortingOrder: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffers(state),
+  offers: getSortedOffers(state),
   activeCity: getCurrentCity(state),
   isDataLoaded: getLoadedDataStatus(state),
+  sortingOrder: getSortingOrder(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
