@@ -11,6 +11,7 @@ import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty, setFavorite} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
+import { FavoriteButton } from '../favorite-button/favorite-button';
 
 
 const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments, toggleFavorite}) => {
@@ -55,7 +56,8 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
               <h1 className="property__name">
                 {title}
               </h1>
-              <button
+              <FavoriteButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite}/>
+              {/* <button
                 className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`}
                 type="button"
                 onClick={toggleFavorite(property)}>
@@ -63,7 +65,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>
-              </button>
+              </button> */}
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
@@ -162,9 +164,9 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadNearPlaces(id) {
     dispatch(fetchNearPlaces(id));
   },
-  toggleFavorite(offer) {
-    const status = offer.isFavorite ? 0 : 1;
-    dispatch(setFavorite(offer.id, status));
+  toggleFavorite(id, status) {
+    // const status = offer.isFavorite ? 0 : 1;
+    dispatch(setFavorite(id, status));
     // и я не могу отсюда, например, воздействовать на саму карточку, чтобы хотя бы фиктивно поменять статус флажка
   },
 });

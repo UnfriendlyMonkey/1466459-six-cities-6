@@ -2,14 +2,16 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
+import {FavoriteButton} from '../favorite-button/favorite-button';
+import {setFavorite} from '../../store/api-actions';
+import {connect} from 'react-redux';
 
 const PlaceCard = (props) => {
-  const {offer, onHover, from = `main`, onFavoriteClick} = props;
+  const {offer, onHover, from = `main`, toggleFavorite} = props;
   const {isPremium, price, previewImage, rating, title, type, isFavorite, id} = offer;
   const premiumMark = <div className="place-card__mark">
     <span>Premium</span>
   </div>;
-  const favoriteClassName = `place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`;
   let articleClassName = `place-card`;
   let imageWrapperClassName = `place-card__image-wrapper`;
   let infoClassName = `place-card__info`;
@@ -35,11 +37,6 @@ const PlaceCard = (props) => {
     }
   };
 
-  const handleFavoriteClick = () => {
-    onFavoriteClick(offer);
-    // а если пытаться менять статус здесь, то карточка вообще не перерисовывается, хотя статус на сервере меняется
-  };
-
   return (
     <article className={articleClassName} onMouseEnter={handleHover}>
       {isPremium && premiumMark}
@@ -54,12 +51,7 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={favoriteClassName} type="button" onClick={handleFavoriteClick}>
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite} from={`place-card`}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -79,8 +71,15 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   offer: offerType,
   onHover: PropTypes.func,
-  onFavoriteClick: PropTypes.func,
+  toggleFavorite: PropTypes.func,
   from: PropTypes.oneOf([`main`, `favorites`, `property`])
 };
 
-export default PlaceCard;
+const mapDispatchToProps = (dispatch) => ({
+  toggleFavorite(id, status) {
+    dispatch(setFavorite(id, status));
+  },
+});
+
+export {PlaceCard};
+export default connect(null, mapDispatchToProps)(PlaceCard);

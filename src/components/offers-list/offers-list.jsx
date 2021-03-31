@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 import {setActiveOffer} from '../../store/action';
-import {setFavorite} from '../../store/api-actions';
 
 const OffersList = (props) => {
-  const {offers, from = `main`, changeActiveOffer, toggleFavorite} = props;
+  const {offers, from = `main`, changeActiveOffer} = props;
   let divClassName = `places__list`;
 
   switch (from) {
@@ -21,7 +20,7 @@ const OffersList = (props) => {
   return (
     <div className={divClassName}>
       {offers.map((offer) => (
-        <PlaceCard key={offer.id} offer={offer} onHover={changeActiveOffer} onFavoriteClick={toggleFavorite} from={from}/>
+        <PlaceCard key={offer.id} offer={offer} onHover={changeActiveOffer} from={from}/>
       ))}
     </div>
   );
@@ -33,19 +32,11 @@ OffersList.propTypes = {
   ).isRequired,
   from: PropTypes.oneOf([`main`, `favorites`, `property`]),
   changeActiveOffer: PropTypes.func.isRequired,
-  toggleFavorite: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeActiveOffer(offer) {
     dispatch(setActiveOffer(offer));
-  },
-  toggleFavorite(offer) {
-    const status = offer.isFavorite ? 0 : 1;
-    dispatch(setFavorite(offer.id, status));
-    // не перерисовывает весь список.
-    // рендерит заново карточку, статус которой поменялся, не удаляя предыдущий экземпляр
-    // причем поверх первой карточки из списка
   },
 });
 
