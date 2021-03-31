@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 
 import {object, func, array} from 'prop-types';
-// import {offerType} from '../../types/offer';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
@@ -11,7 +10,7 @@ import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty, setFavorite} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
-import { FavoriteButton } from '../favorite-button/favorite-button';
+import {FavoriteButton} from '../favorite-button/favorite-button';
 
 
 const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments, toggleFavorite}) => {
@@ -57,15 +56,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
                 {title}
               </h1>
               <FavoriteButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite}/>
-              {/* <button
-                className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`}
-                type="button"
-                onClick={toggleFavorite(property)}>
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button> */}
+
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
@@ -165,9 +156,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchNearPlaces(id));
   },
   toggleFavorite(id, status) {
-    // const status = offer.isFavorite ? 0 : 1;
     dispatch(setFavorite(id, status));
-    // и я не могу отсюда, например, воздействовать на саму карточку, чтобы хотя бы фиктивно поменять статус флажка
   },
 });
 
