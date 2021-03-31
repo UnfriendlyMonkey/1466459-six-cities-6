@@ -8,12 +8,12 @@ import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
-import {fetchComments, fetchNearPlaces, fetchProperty} from '../../store/api-actions';
+import {fetchComments, fetchNearPlaces, fetchProperty, setFavorite} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
 
 
-const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments, toggleFavorite}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
   useEffect(() => {
@@ -57,7 +57,8 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
               </h1>
               <button
                 className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`}
-                type="button">
+                type="button"
+                onClick={toggleFavorite(property)}>
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
@@ -140,6 +141,7 @@ Property.propTypes = {
   onLoadProperty: func.isRequired,
   onLoadComments: func.isRequired,
   onLoadNearPlaces: func.isRequired,
+  toggleFavorite: func.isRequired,
   nearPlaces: array,
   comments: array,
 };
@@ -159,6 +161,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLoadNearPlaces(id) {
     dispatch(fetchNearPlaces(id));
+  },
+  toggleFavorite(offer) {
+    const status = offer.isFavorite ? 0 : 1;
+    dispatch(setFavorite(offer.id, status));
+    // и я не могу отсюда, например, воздействовать на саму карточку, чтобы хотя бы фиктивно поменять статус флажка
   },
 });
 
