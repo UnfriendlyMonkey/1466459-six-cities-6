@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
 
 const PlaceCard = (props) => {
-  const {offer, onHover, from = `main`} = props;
+  const {offer, onHover, from = `main`, onFavoriteClick} = props;
   const {isPremium, price, previewImage, rating, title, type, isFavorite, id} = offer;
   const premiumMark = <div className="place-card__mark">
     <span>Premium</span>
@@ -30,9 +30,14 @@ const PlaceCard = (props) => {
   }
 
   const handleHover = () => {
-    if (onHover) {
+    if (onHover && from === `main`) {
       onHover(offer);
     }
+  };
+
+  const handleFavoriteClick = () => {
+    onFavoriteClick(offer);
+    // а если пытаться менять статус здесь, то карточка вообще не перерисовывается, хотя статус на сервере меняется
   };
 
   return (
@@ -49,7 +54,7 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={favoriteClassName} type="button">
+          <button className={favoriteClassName} type="button" onClick={handleFavoriteClick}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -74,6 +79,7 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   offer: offerType,
   onHover: PropTypes.func,
+  onFavoriteClick: PropTypes.func,
   from: PropTypes.oneOf([`main`, `favorites`, `property`])
 };
 
