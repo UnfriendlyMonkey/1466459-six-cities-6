@@ -10,6 +10,8 @@ export const getSortedOffers = (state) => {
   return sorting[sortingOrder](state[NameSpace.OFFERS].offers.filter((offer) => offer.city.name === currentCity));
 };
 // too complicated it seems
-export const getFavorites = (state) => state[NameSpace.OFFERS].offers.filter((offer) => offer.isFavorite === true);
+// export const getFavorites = (state) => state[NameSpace.OFFERS].offers.filter((offer) => offer.isFavorite === true);
+export const getFavorites = (state) => state[NameSpace.USER].favorite;
+export const getLoadedFavoriteStatus = (state) => state[NameSpace.USER].isFavoriteLoaded;
 export const getLoadedDataStatus = (state) => state[NameSpace.OFFERS].isDataLoaded;
 export const getSortingOrder = (state) => state[NameSpace.OFFERS].sortedBy;

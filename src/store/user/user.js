@@ -6,6 +6,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   login: ``,
   favorite: [],
+  isFavoriteLoaded: false,
 };
 
 const user = createReducer(initialState, (builder) => {
@@ -15,6 +16,7 @@ const user = createReducer(initialState, (builder) => {
   });
   builder.addCase(loadFavorite, (state, action) => {
     state.favorite = action.payload;
+    state.isFavoriteLoaded = true;
   });
 });
 
