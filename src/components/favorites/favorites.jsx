@@ -22,19 +22,32 @@ const Favorites = (props) => {
       <LoadingScreen />
     );
   }
+
+  const emptyList = (
+    <section className="favorites favorites--empty">
+      <h1 className="visually-hidden">Favorites (empty)</h1>
+      <div className="favorites__status-wrapper">
+        <b className="favorites__status">Nothing yet saved.</b>
+        <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+      </div>
+    </section>
+  );
   const cities = [...new Set(offers.map((offer) => offer.city.name))];
+  const noEmptyList = (
+    <section className="favorites">
+      <h1 className="favorites__title">Saved listing</h1>
+      <ul className="favorites__list">
+        {cities.map((city) => (
+          <FavoritesCity key={cities.indexOf(city)} city={city} offers={offers.filter((offer) => offer.city.name === city)}/>
+        ))}
+      </ul>
+    </section>
+  );
 
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
-        <section className="favorites">
-          <h1 className="favorites__title">Saved listing</h1>
-          <ul className="favorites__list">
-            {cities.map((city) => (
-              <FavoritesCity key={cities.indexOf(city)} city={city} offers={offers.filter((offer) => offer.city.name === city)}/>
-            ))}
-          </ul>
-        </section>
+        {offers.length === 0 ? emptyList : noEmptyList}
       </div>
     </main>
   );
