@@ -13,10 +13,9 @@ const FavoriteButton = ({id, isFavorite, toggleFavorite, from = `property`}) => 
   const status = favorite ? 0 : 1;
   const handleFavorite = () => {
     toggleFavorite(id, status);
-    changeFavorite((prevState) => ({
-      ...prevState,
-      favorite: !prevState.favorite,
-    }));
+    changeFavorite((prevState) => {
+      return !prevState;
+    });
   };
   switch (from) {
     case (`place-card`):
