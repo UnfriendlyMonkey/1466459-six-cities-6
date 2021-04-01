@@ -28,7 +28,7 @@ const CommentForm = ({id, handleSubmit}) => {
     setComment(target.value);
   };
 
-  const isDisabled = (rating && comment) ? `` : `disabled`;
+  const isDisabled = (rating && comment.length >= 50 && comment.length <= 300) ? `` : `disabled`;
 
   const stars = [[`5`, `perfect`], [`4`, `good`], [`3`, `not bad`], [`2`, `badly`], [`1`, `terribly`]];
 
@@ -54,8 +54,10 @@ const CommentForm = ({id, handleSubmit}) => {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        minLength="50"
+        maxLength="300"
         onChange={handleCommentChange}></textarea>
-      <div className="reviews__button-wrapper">в
+      <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>

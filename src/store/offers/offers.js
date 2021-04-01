@@ -18,7 +18,8 @@ const offers = createReducer(initialState, (builder) => {
     state.isDataLoaded = true;
   });
   builder.addCase(updateProperty, (state, action) => {
-    const index = state.offers.find((offer) => offer.id === action.payload.id);
+    const index = state.offers.indexOf((offer) => offer.id === action.payload.id);
+    // кажется, что так не получить доступ к state.offers. Как тогда?
     state.offers.splice(index, 1, action.payload);
     // возможно, здесь как-то иначе нужно пропихивать обновленную карточку в список?
   });

@@ -9,6 +9,7 @@ export const ActionType = {
   LOAD_COMMENTS: `loadComments`,
   LOAD_NEAR_PLACES: `loadNearPlaces`,
   LOAD_FAVORITE: `loadFavorite`,
+  UPDATE_FAVORITE: `updateFavorite`,
   REQUIRED_AUTHORIZATION: `requiredAuthorization`,
   REDIRECT_TO_ROUTE: `redirectToRoute`,
   UPDATE_PROPERTY: `updateProperty`,
@@ -60,6 +61,12 @@ export const loadNearPlaces = createAction(ActionType.LOAD_NEAR_PLACES, (offers)
 export const loadFavorite = createAction(ActionType.LOAD_FAVORITE, (offers) => {
   return {
     payload: offers
+  };
+});
+
+export const updateFavorite = createAction(ActionType.UPDATE_FAVORITE, (offer) => {
+  return {
+    payload: offer
   };
 });
 

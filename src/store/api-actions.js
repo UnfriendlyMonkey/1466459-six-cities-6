@@ -1,4 +1,4 @@
-import {loadOffers, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, setActiveOffer, loadFavorite} from './action';
+import {loadOffers, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, setActiveOffer, loadFavorite, updateFavorite} from './action';
 import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
 import {commentsAdapterToClient} from '../services/comments-adapter';
@@ -64,6 +64,7 @@ export const setFavorite = (id, status) => (dispatch, _getState, api) => (
   api.post(`/favorite/${id}/${status}`)
   // что делать, если действие вызвано из других списков (например, nearPlaces)?
     .then(({data}) => offersAdapter(data))
+    // .then((offer) => dispatch(updateFavorite(offer)))
     // .then((offer) => dispatch(updateProperty(offer)))
     .catch(() => {})
 );
