@@ -1,13 +1,8 @@
 import {bool, func, number, string} from 'prop-types';
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-// import {setFavorite} from '../../store/api-actions';
 
 const FavoriteButton = ({id, isFavorite, toggleFavorite, from = `property`}) => {
-  // console.log(props);
-  // console.log(id, isFavorite, toggleFavorite);
-
-  // const {id, isFavorite} = props;
 
   const [favorite, changeFavorite] = useState(isFavorite);
   const status = favorite ? 0 : 1;
@@ -51,12 +46,6 @@ FavoriteButton.propTypes = {
   toggleFavorite: func.isRequired,
   from: string,
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   toggleFavorite(id, status) {
-//     dispatch(setFavorite(id, status));
-//   }
-// });
 
 export {FavoriteButton};
 export default connect(null, null)(FavoriteButton);

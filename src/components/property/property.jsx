@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 
-import {object, func, array} from 'prop-types';
+import {object, func, array, string} from 'prop-types';
 import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import OffersList from '../offers-list/offers-list';
@@ -11,9 +11,10 @@ import {fetchComments, fetchNearPlaces, fetchProperty, setFavorite} from '../../
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
 import {FavoriteButton} from '../favorite-button/favorite-button';
+import {getLogin} from '../../store/user/selectors';
 
 
-const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments, toggleFavorite}) => {
+const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer, nearPlaces, comments, toggleFavorite, login}) => {
   let {id} = useParams();
   id = parseInt(id, 10);
   useEffect(() => {
@@ -111,7 +112,7 @@ const Property = ({onLoadProperty, onLoadComments, onLoadNearPlaces, activeOffer
             </div>
             <section className="property__reviews reviews">
               <CommentsList comments={comments}/>
-              <CommentForm id={id}/>
+              {login === `` ? `` : <CommentForm id={id}/>}
             </section>
           </div>
         </div>
@@ -137,12 +138,14 @@ Property.propTypes = {
   toggleFavorite: func.isRequired,
   nearPlaces: array,
   comments: array,
+  login: string,
 };
 
 const mapStateToProps = (state) => ({
   activeOffer: getActiveOffer(state),
   nearPlaces: getNearPlaces(state),
   comments: getComments(state),
+  login: getLogin(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
