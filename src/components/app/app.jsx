@@ -11,12 +11,12 @@ import PrivateRoute from '../private-route/private-route';
 import LoginRoute from '../private-route/login-route';
 import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
-import {getLogin} from '../../store/user/selectors';
+import {getFavorite, getLogin} from '../../store/user/selectors';
 
 
 const App = (props) => {
 
-  const {login} = props;
+  const {login, favorite} = props;
 
   let pageClassName = ``;
   switch (window.location.pathname) {
@@ -27,7 +27,7 @@ const App = (props) => {
       pageClassName = `page page--gray page--login`;
       break;
     case `/favorites`:
-      pageClassName = `page page--favorites-empty`;
+      pageClassName = favorite.length === 0 ? `page page--favorites-empty` : `page`;
       break;
     default:
       pageClassName = `page`;
@@ -97,10 +97,12 @@ const App = (props) => {
 
 App.propTypes = {
   login: PropTypes.string.isRequired,
+  favorite: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   login: getLogin(state),
+  favorite: getFavorite(state),
 });
 
 export {App};
