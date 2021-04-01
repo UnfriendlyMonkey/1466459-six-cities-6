@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerType} from '../../types/offer';
-import {FavoriteButton} from '../favorite-button/favorite-button';
+import FavoriteButton from '../favorite-button/favorite-button';
 import {setFavorite} from '../../store/api-actions';
 import {connect} from 'react-redux';
 
