@@ -1,4 +1,4 @@
-import {loadOffers, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, setActiveOffer, loadFavorite, updateFavorite} from './action';
+import {loadOffers, loadComments, loadNearPlaces, requireAuthorization, redirectToRoute, setActiveOffer, loadFavorite} from './action';
 import {AuthorizationStatus} from '../const';
 import {offersAdapter} from '../services/offers-adapter';
 import {commentsAdapterToClient} from '../services/comments-adapter';
