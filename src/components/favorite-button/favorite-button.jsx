@@ -1,16 +1,24 @@
 import {bool, func, number, string} from 'prop-types';
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import browserHistory from '../../browser-history';
+import {AppRoute} from '../../const';
+import {getLogin} from '../../store/user/selectors';
 
-const FavoriteButton = ({id, isFavorite, toggleFavorite, from = `property`}) => {
+const FavoriteButton = (props) => {
 
+  const {login, id, isFavorite, toggleFavorite, from = `property`} = props;
   const [favorite, changeFavorite] = useState(isFavorite);
   const status = favorite ? 0 : 1;
   const handleFavorite = () => {
-    toggleFavorite(id, status);
-    changeFavorite((prevState) => {
-      return !prevState;
-    });
+    if (login === ``) {
+      browserHistory.push(AppRoute.LOGIN);
+    } else {
+      toggleFavorite(id, status);
+      changeFavorite((prevState) => {
+        return !prevState;
+      });
+    }
   };
   switch (from) {
     case (`place-card`):
@@ -45,7 +53,14 @@ FavoriteButton.propTypes = {
   isFavorite: bool.isRequired,
   toggleFavorite: func.isRequired,
   from: string,
+  login: string,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    login: getLogin(state),
+  };
 };
 
 export {FavoriteButton};
-export default connect(null, null)(FavoriteButton);
+export default connect(mapStateToProps, null)(FavoriteButton);

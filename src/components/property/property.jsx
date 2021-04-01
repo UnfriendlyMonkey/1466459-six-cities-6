@@ -10,7 +10,7 @@ import Map from '../map/map';
 import {fetchComments, fetchNearPlaces, fetchProperty, setFavorite} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getActiveOffer, getComments, getNearPlaces} from '../../store/property/selectors';
-import {FavoriteButton} from '../favorite-button/favorite-button';
+import FavoriteButton from '../favorite-button/favorite-button';
 import {getLogin} from '../../store/user/selectors';
 
 
