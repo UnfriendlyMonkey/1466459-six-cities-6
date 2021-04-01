@@ -14,7 +14,7 @@ import PlacesSort from '../places-sort/places-sort';
 
 const Main = (props) => {
   const {offers, activeCity, isDataLoaded, onLoadData, sortingOrder} = props;
-  const placesFound = offers.filter((offer) => offer.city.name === activeCity).length;
+  const placesFound = offers.length;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -40,11 +40,11 @@ const Main = (props) => {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{placesFound} places to stay in {activeCity}</b>
             <PlacesSort />
-            <OffersList offers={offers.filter((offer) => offer.city.name === activeCity)}/>
+            <OffersList offers={offers}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={activeCity} points={offers.filter((offer) => offer.city.name === activeCity)}/>
+              <Map city={activeCity} points={offers}/>
             </section>
           </div>
         </div>
